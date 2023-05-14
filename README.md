@@ -18,8 +18,6 @@
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-
 
 ## Sobre el Proyecto
 
@@ -52,6 +50,10 @@ El proyecto consta de dos partes el backend y el frontend. Para el backend estoy
 - ⛩️ **Arquitectura limpia**: el proyecto está hecho siguiendo una arquitectura limpia para que sea más escalable y facíl de mantener.
 - 🔒 **Almacenaminto seguro**: Cifrado de token para almacenarlo en las preferencias de usuario de una manera segura.
 
+
+### Link video
+
+[Presentación](https://youtu.be/DA0xH3O4iaM)
 
 ### Base de Datos
 ![bbdd](assets/bd.svg)
