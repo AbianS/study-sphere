@@ -55,5 +55,9 @@ El proyecto consta de dos partes el backend y el frontend. Para el backend estoy
 
 [Presentación](https://youtu.be/DA0xH3O4iaM)
 
+### Wireframe
+
+[wireframe](https://www.figma.com/file/Vp3TlN6NbT1tMXSohAZFyF/Untitled?type=design&node-id=0%3A1&t=RoVniN3SiPm2VXBA-1)
+
 ### Base de Datos
 ![bbdd](assets/bd.svg)
