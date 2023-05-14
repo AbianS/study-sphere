@@ -1,0 +1,865 @@
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='2208' height='766' viewBox='0 0 2208 766' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','unhighlight'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#1c1d1f; font-weight:normal;stroke:#2a2b2c;stroke-width:.1px; font-family: Segoe UI, 'Segoe UI', Dialog; font-size:13.0px; }
+  a text:hover        { font-weight:500; }
+  text.highlight      { font-weight:500; }
+  text.white          { fill:#ffffff; }
+  text.colType        { fill:#b3b3b3; }
+  text.relName        { fill:#9c9a9a; stroke-width:0; }
+  text.legendTitle    { fill:#2b3b64; font-weight:500; }
+  text.legendSubTitle { fill:#616161; font-size:12px; }
+  path, circle        { stroke:#939391; stroke-width:1.65; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .filled             { fill:#939391; }
+  path.virtual        { stroke:#6e377e; }
+  path.logo           { fill:#fbeac0;fill-opacity:1;stroke-width:0.3;stroke:#222222; }
+  path.dotted         { stroke-dasharray:3,3; }
+  path.unhighlight    { stroke-width:5; opacity:0; pointer-events:all; }
+  path.highlight      { stroke-width:3; stroke:#a19f9b; opacity:0.8; pointer-events:all; }
+  path.line           { stroke-width:10; stroke-linecap:round; stroke-linejoin:round; }
+  rect.entity         { fill:#ffffff; stroke-width:0; shape-rendering:crispEdges;  filter:url(#shadow); }
+  line.delim          { stroke-width:1px; shape-rendering:crispEdges; }
+  line.topLine        { stroke-width:2.5px; shape-rendering:crispEdges; }
+  text.callout        { fill:#201a10; font-family: Segoe UI, 'Segoe UI', Dialog; font-size:13.0px; }
+  rect.callout        { fill:url(#calloutGradient); stroke-width:1px; stroke:#b0b0b0; }
+  rect.shape          { stroke:#bebdbd; stroke-width:0.5; }
+  text.grp            { fill:#b1b1b1; }
+  rect.grp            { stroke:#919171; stroke-width:3; opacity:0.34; }
+  path.bgPattern      { fill:none;stroke-width:0.6;stroke:#e5e9ee; }
+  path.eval           { fill:#ececec;fill-opacity:1;stroke-width:0.6;stroke:#dddddd; }
+  rect.palpable       { fill:#fffbe5; }
+</style>
+<defs>
+  <pattern id="layoutBgA" width="60" height="34.64" patternUnits="userSpaceOnUse">
+    <rect x="0" y="0"  width="60" height="34.64" fill="#f2f2f4" />
+  </pattern>
+
+  <!-- https://norbat.de/svg-pattern-3d-webmuster/ -->
+  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+    <stop offset='0%' stop-color='#fefdf7aa' />
+    <stop offset='100%' stop-color='#fcf9e7aa' />
+  </radialGradient>
+  <filter id="shadow">
+    <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#707070" flood-opacity="0.6" />
+  </filter>
+  <!--
+  <filter id='shadow2' width='120%' height='120%'>
+    <feOffset result='offOut' in='SourceGraphic' dx='0' dy='0' />
+    <feColorMatrix result='matrixOut' in='offOut'
+                   values='0.5 0 0 0 0 0 0.5 0 0 0 0 0 0.5 0 0 0 0 0 0.5 0' />
+    <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' />
+    <feBlend in='SourceGraphic' in2='blurOut' />
+  </filter>
+  -->
+  <filter id='fkShadow' height='130%'>
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+    <feMerge>
+      <feMergeNode/> <!-- this contains the offset blurred image -->
+      <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter>
+  <radialGradient id='legendGradient' cx='5%' cy='5%' r='100%' >
+    <stop offset='0%' stop-color='#fdfeff' stop-opacity='1'/>
+    <stop offset='100%' stop-color='#e1eafa' stop-opacity='1' />
+  </radialGradient>
+  <symbol id='calloutArrowDown' >
+    <path d='M 0,0 L 8,12 L 16,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+    <path d='M 0,0 L 8,12 L 16,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' >
+    <path d='M 0,16 L 8,4 L 16,16 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+    <path d='M 0,16 L 8,4 L 16,16' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' width="13" height="13">
+    <g transform='scale(0.99)'>
+      <path style='fill:#f0d938;stroke:#906b25;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
+            d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+      <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+            style='fill:#ffe5a5;fill-opacity:1;stroke:#906b25;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='idx1' width="13" height="13">
+    <g transform='scale(0.99)'>
+      <rect width='4' height='4' x='7' y='1' style='fill:#ffff3f;stroke:#b48333;stroke-width:0.6;' ry='0.83'/>
+      <rect width='4' height='4' x='1' y='7' style='fill:#ffff3f;stroke:#b48333;stroke-width:0.6;' ry='0.832'/>
+      <rect width='4' height='4' x='7' y='7' style='fill:#ffff3f;stroke:#b48333;stroke-width:0.6;' ry='0.832'/>
+    </g>
+  </symbol>
+  <symbol id='idx2' width="13" height="13">
+    <g transform='scale(0.99)'>
+      <rect width='4' height='3' x='6' y='1' style='fill:#7fc8e9;stroke:#2f6f8c;stroke-width:0.6;' ry='0.83'/>
+      <rect width='7' height='3' x='3' y='6' style='fill:#7fc8e9;stroke:#2f6f8c;stroke-width:0.6;' ry='0.832'/>
+    </g>
+  </symbol>
+  <symbol id='unq' width="13" height="13">
+    <g transform='scale(0.99)'>
+      <rect style='fill:none;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+            width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+            transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.4' y='7.2' style='font-size:7px;fill:#655c59;'>U</text>
+    </g>
+  </symbol>
+  <symbol id='idx' width="13" height="13">
+    <g transform='scale(0.99)'>
+      <rect style='fill:none;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+            width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+            transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' width="13" height="13">
+    <g transform='scale(0.87)'>
+      <path style='fill:#6a88cd;stroke:#5a72a8;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' width="13" height="13">
+    <g transform='scale(0.87)'>
+      <path style='fill:#f0d938;stroke:#906b25;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag0' width="13" height="13">
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag1' width="13" height="13">
+    <g transform='scale(0.92)'>
+      <path style='fill:#f4a393;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag2' width="13" height="13">
+    <g transform='scale(0.92)'>
+      <path style='fill:#77ec8b;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' width="3" height="3">
+    <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <symbol id='virtual' width="13" height="13">
+    <circle cx='6' cy='6.5' r='5.5' fill='#a3dda3' stroke='#4c6a4c' stroke-width='0.5'/>
+    <path style='stroke:#ffffff;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 3,4 6,10 9,4'/>
+  </symbol>
+  <symbol id='view' width="13" height="13">
+    <g transform='scale(0.99)'>
+      <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
+      <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
+      <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+      <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+    </g>
+  </symbol>
+  <symbol id='logo' width="100" height="100">
+    <path style='stroke:none;fill:#5d5d5d' d='M2.41,6.80 17.39,0.35 26.83,7.21 28.32,24.45 12.62,29.77 1.74,23.96'/>
+    <path style='stroke:none;fill:#efefef' d='M 2.21, 6.45  9.36, 3.49  9.42,11.63  2.04,14.42'/>
+    <path style='stroke:none;fill:#efefef' d='M10.23, 3.14 17.39, 0.17 17.68, 8.59 10.29,11.28'/>
+    <path style='stroke:none;fill:#d2d2d2' d='M17.44, 0.17 21.59, 3.55 22.36,11.43 17.76,8.63'/>
+    <path style='stroke:none;fill:#d2d2d2' d='M22.67, 4.33 26.98, 7.06 27.65,14.77 23.20,11.77'/>
+    <path style='stroke:none;fill:#efefef' d='M1.89,15.58  9.39,12.65  9.48,21.14  1.57,24.10'/>
+    <path style='stroke:none;fill:#17afde' d='M10.38,12.36 17.70, 9.51 18.11,18.37 10.32 20.96'/>
+    <path style='stroke:none;fill:#1389ad' d='M17.73, 9.59 22.41,12.47 22.82,21.14 18.05,18.34'/>
+    <path style='stroke:none;fill:#d2d2d2' d='M23.26,12.94 27.62,15.70 28.42,24.54 23.69,21.60'/>
+    <path style='stroke:none;fill:#828282' d='M1.57,24.19  9.45,21.22 14.30,24.40  6.80,26.80'/>
+    <path style='stroke:none;fill:#0c485c' d='M10.47,20.90 18.11,18.32 22.82,21.19 15.20,23.81'/>
+    <path style='stroke:none;fill:#828282' d='M23.69,21.63 28.32,24.65 20.87,27.07 15.84,24.30'/>
+    <path style='stroke:none;fill:#828282' d='M14.94,24.68 19.80,27.41 12.59,29.97  7.73,27.21'/>
+  </symbol>
+
+</defs>
+
+<defs>  <marker id='ZeroMore' viewBox='0 0 8.00 8.00' refX='4.00' refY='4.00' markerWidth='8.00' markerHeight='8.00' orient='auto-start-reverse'>
+    <circle cx='2.00' cy='4.00' r='2.00' style='stroke-width:1;' />
+    <path d='M 8.00,0.00 L 4.00,4.00 L 8.00,8.00' style='stroke-width:1;'/>
+    <path d='M 0.00,4.00 L 8.00,4.00 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='ZeroOne' viewBox='0 0 8.00 8.00' refX='4.00' refY='4.00' markerWidth='8.00' markerHeight='8.00' orient='auto-start-reverse'>
+    <path d='M 0.00,4.00 L 8.00,4.00 z' style='stroke-width:1;'/>
+    <circle cx='2.00' cy='4.00' r='2.00' style='stroke-width:1;' />
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='OneMore' viewBox='0 0 8.00 8.00' refX='4.00' refY='4.00' markerWidth='8.00' markerHeight='8.00' orient='auto-start-reverse'>
+    <path d='M 0.00,4.00 L 8.00,4.00 z' style='stroke-width:1;'/>
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' style='stroke-width:1;'/>
+    <path d='M 8.00,0.00 L 4.00,4.00 L 8.00,8.00' style='stroke-width:1;'/>
+    <path d='M 0.00,4.00 L 8.00,4.00 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='One' viewBox='0 0 8.00 8.00' refX='4.00' refY='4.00' markerWidth='8.00' markerHeight='8.00' orient='auto-start-reverse'>
+    <path d='M 0.00,4.00 L 8.00,4.00 z' style='stroke-width:1;'/>
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='Range' viewBox='0 0 8.00 8.00' refX='4.00' refY='4.00' markerWidth='8.00' markerHeight='8.00' orient='auto-start-reverse'>
+    <path d='M 0.00,4.00 L 8.00,4.00 z' style='stroke-width:1;'/>
+  </marker>
+  <marker id='Arrow' viewBox='0 0 8.00 8.00' refX='4.00' refY='4.00' markerWidth='8.00' markerHeight='8.00' orient='auto-start-reverse'>
+    <path d='M 4.000,2.000 L 8.000,4.000 L 4.000,6.000 z' style='stroke-width:1;' class='filled'/>
+  </marker>
+  <linearGradient id='tbg_C7F4BE' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#FEFFFE' /> 
+     <stop offset='75%' stop-color='#E4FDDF' /> 
+     <stop offset='100%' stop-color='#C5FEBA' /> 
+  </linearGradient>
+  <linearGradient id='tbg_BED3F4' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#FEFEFF' /> 
+     <stop offset='75%' stop-color='#DFEAFD' /> 
+     <stop offset='100%' stop-color='#BAD4FE' /> 
+  </linearGradient>
+</defs>
+
+<!-- == Shape Colors == -->
+<!-- == Desktop == -->
+<rect x='1' y='1' width='2206' height='764' rx='8' ry='8' style='fill:url(#layoutBgA); stroke:#ccc; stroke-width:.7px; cursor:move;' />
+<rect x='1' y='1' width='2206' height='764' rx='8' ry='8' style='fill:url(#layoutBgEval);' />
+
+<!-- == Legend == -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='310' height='70' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
+  <use id='logo' x='20' y='40' xlink:href='#logo'><title>DbSchema Database Designer </title></use>  <text x='20' y='30' class='legendTitle' >Main Layout</text> 
+  <text x='57' y='47' class='legendSubTitle'><tspan>Comments as mouse-over tips, zoom and pan.<title>Read column and table comments by hovering the columns and tables.
+Zoom with CTRL+whell mouse button, pan by dragging the diagram with the right-mouse button</title></tspan></text> 
+  <a xlink:href='https%3A%2F%2Fdbschema.com'><text x='57' y='61' class='legendSubTitle'><tspan>by DbSchema.com - Wise Coders<title>DbSchema is an universal database designer.
+DbSchema has a free Community Edition.</title></tspan></text></a> 
+</g>
+
+<g transform='translate(0,110)'>
+<!-- == Group 'Clase' == -->
+<rect class='grp' style='fill:#EEFDEC;stroke:#769171' x='1312' y='45' width='864' height='530' />
+<text x='1324' y='61' style='fill:#71AC66;'>Clase</text>
+<!-- == Group 'User' == -->
+<rect class='grp' style='fill:#ECF2FD;stroke:#717D91' x='32' y='45' width='1184' height='546' />
+<text x='44' y='61' style='fill:#6680AC;'>User</text>
+<!-- == Fk 'Attendance_Attendance_claseId_fkey' == -->
+<path id='Attendance_Attendance_claseId_fkey'  onmouseover="hghl(['Attendance_Attendance_claseId_fkey','public.Attendance.claseId','public.Clase.id'])" onmouseout="uhghl(['Attendance_Attendance_claseId_fkey','public.Attendance.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 1424,368L 1424,280Q 1424,272 1432,272L 1576,272Q 1584,272 1584,264L 1584,256' >
+	<title>&#x1F517;  Foreign Key Attendance_claseId_fkey
+Attendance ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1424,368L 1424,280Q 1424,272 1432,272L 1576,272Q 1584,272 1584,264L 1584,256' ><title>&#x1F517;  Foreign Key Attendance_claseId_fkey
+Attendance ref Clase ( claseId -&gt; id )</title></path>
+<text x='1427' y='366' transform='rotate(270 1427,366)' class='relName'>claseId</text>
+<!-- == Fk 'Attendance_Attendance_studentId_fkey' == -->
+<path id='Attendance_Attendance_studentId_fkey'  onmouseover="hghl(['Attendance_Attendance_studentId_fkey','public.Attendance.studentId','public.User.id'])" onmouseout="uhghl(['Attendance_Attendance_studentId_fkey','public.Attendance.studentId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 1312,384L 744,384Q 736,384 736,376L 736,328Q 736,320 728,320L 472,320Q 464,320 464,312L 464,304' >
+	<title>&#x1F517;  Foreign Key Attendance_studentId_fkey
+Attendance ref User ( studentId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1312,384L 744,384Q 736,384 736,376L 736,328Q 736,320 728,320L 472,320Q 464,320 464,312L 464,304' ><title>&#x1F517;  Foreign Key Attendance_studentId_fkey
+Attendance ref User ( studentId -&gt; id )</title></path>
+<text x='1267' y='379' transform='rotate(0 1267,379)' class='relName'>studentId</text>
+<!-- == Fk 'Clase_Clase_teacherId_fkey' == -->
+<path id='Clase_Clase_teacherId_fkey'  onmouseover="hghl(['Clase_Clase_teacherId_fkey','public.Clase.teacherId','public.User.id'])" onmouseout="uhghl(['Clase_Clase_teacherId_fkey','public.Clase.teacherId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 1552,80L 1224,80Q 1216,80 1216,72L 1216,8Q 1216,0 1208,0L 440,0Q 432,0 432,8L 432,64' >
+	<title>&#x1F517;  Foreign Key Clase_teacherId_fkey
+Clase ref User ( teacherId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1552,80L 1224,80Q 1216,80 1216,72L 1216,8Q 1216,0 1208,0L 440,0Q 432,0 432,8L 432,64' ><title>&#x1F517;  Foreign Key Clase_teacherId_fkey
+Clase ref User ( teacherId -&gt; id )</title></path>
+<text x='1508' y='75' transform='rotate(0 1508,75)' class='relName'>teacherId</text>
+<!-- == Fk 'Comment_Comment_claseId_fkey' == -->
+<path id='Comment_Comment_claseId_fkey'  onmouseover="hghl(['Comment_Comment_claseId_fkey','public.Comment.claseId','public.Clase.id'])" onmouseout="uhghl(['Comment_Comment_claseId_fkey','public.Comment.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 720,528L 1528,528Q 1536,528 1536,520L 1536,232Q 1536,224 1544,224L 1552,224' >
+	<title>&#x1F517;  Foreign Key Comment_claseId_fkey
+Comment ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 720,528L 1528,528Q 1536,528 1536,520L 1536,232Q 1536,224 1544,224L 1552,224' ><title>&#x1F517;  Foreign Key Comment_claseId_fkey
+Comment ref Clase ( claseId -&gt; id )</title></path>
+<text x='729' y='523' transform='rotate(0 729,523)' class='relName'>claseId</text>
+<!-- == Fk 'Comment_Comment_userId_fkey' == -->
+<path id='Comment_Comment_userId_fkey'  onmouseover="hghl(['Comment_Comment_userId_fkey','public.Comment.userId','public.User.id'])" onmouseout="uhghl(['Comment_Comment_userId_fkey','public.Comment.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 592,400L 456,400Q 448,400 448,392L 448,304' >
+	<title>&#x1F517;  Foreign Key Comment_userId_fkey
+Comment ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 592,400L 456,400Q 448,400 448,392L 448,304' ><title>&#x1F517;  Foreign Key Comment_userId_fkey
+Comment ref User ( userId -&gt; id )</title></path>
+<text x='566' y='395' transform='rotate(0 566,395)' class='relName'>userId</text>
+<!-- == Fk 'Material_Material_claseId_fkey' == -->
+<path id='Material_Material_claseId_fkey'  onmouseover="hghl(['Material_Material_claseId_fkey','public.Material.claseId','public.Clase.id'])" onmouseout="uhghl(['Material_Material_claseId_fkey','public.Material.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 1600,368L 1600,256' >
+	<title>&#x1F517;  Foreign Key Material_claseId_fkey
+Material ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1600,368L 1600,256' ><title>&#x1F517;  Foreign Key Material_claseId_fkey
+Material ref Clase ( claseId -&gt; id )</title></path>
+<text x='1603' y='366' transform='rotate(270 1603,366)' class='relName'>claseId</text>
+<!-- == Fk 'Material_Material_topicId_fkey' == -->
+<path id='Material_Material_topicId_fkey'  onmouseover="hghl(['Material_Material_topicId_fkey','public.Material.topicId','public.Topic.id'])" onmouseout="uhghl(['Material_Material_topicId_fkey','public.Material.topicId','public.Topic.id'])" transform='translate(8,0)' class='unhighlight' d='M 1680,400L 1792,400' >
+	<title>&#x1F517;  Foreign Key Material_topicId_fkey
+Material ref Topic ( topicId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1680,400L 1792,400' ><title>&#x1F517;  Foreign Key Material_topicId_fkey
+Material ref Topic ( topicId -&gt; id )</title></path>
+<text x='1689' y='395' transform='rotate(0 1689,395)' class='relName'>topicId</text>
+<!-- == Fk 'Message_Message_reciberId_fkey' == -->
+<path id='Message_Message_reciberId_fkey'  onmouseover="hghl(['Message_Message_reciberId_fkey','public.Message.reciberId','public.User.id'])" onmouseout="uhghl(['Message_Message_reciberId_fkey','public.Message.reciberId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 336,416L 336,304' >
+	<title>&#x1F517;  Foreign Key Message_reciberId_fkey
+Message ref User ( reciberId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 336,416L 336,304' ><title>&#x1F517;  Foreign Key Message_reciberId_fkey
+Message ref User ( reciberId -&gt; id )</title></path>
+<text x='339' y='414' transform='rotate(270 339,414)' class='relName'>reciberId</text>
+<!-- == Fk 'Message_Message_senderId_fkey' == -->
+<path id='Message_Message_senderId_fkey'  onmouseover="hghl(['Message_Message_senderId_fkey','public.Message.senderId','public.User.id'])" onmouseout="uhghl(['Message_Message_senderId_fkey','public.Message.senderId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 352,416L 352,304' >
+	<title>&#x1F517;  Foreign Key Message_senderId_fkey
+Message ref User ( senderId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 352,416L 352,304' ><title>&#x1F517;  Foreign Key Message_senderId_fkey
+Message ref User ( senderId -&gt; id )</title></path>
+<text x='355' y='414' transform='rotate(270 355,414)' class='relName'>senderId</text>
+<!-- == Fk 'Question_Question_claseId_fkey' == -->
+<path id='Question_Question_claseId_fkey'  onmouseover="hghl(['Question_Question_claseId_fkey','public.Question.claseId','public.Clase.id'])" onmouseout="uhghl(['Question_Question_claseId_fkey','public.Question.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 1792,96L 1680,96' >
+	<title>&#x1F517;  Foreign Key Question_claseId_fkey
+Question ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1792,96L 1680,96' ><title>&#x1F517;  Foreign Key Question_claseId_fkey
+Question ref Clase ( claseId -&gt; id )</title></path>
+<text x='1762' y='91' transform='rotate(0 1762,91)' class='relName'>claseId</text>
+<!-- == Fk 'Question_Question_topicId_fkey' == -->
+<path id='Question_Question_topicId_fkey'  onmouseover="hghl(['Question_Question_topicId_fkey','public.Question.topicId','public.Topic.id'])" onmouseout="uhghl(['Question_Question_topicId_fkey','public.Question.topicId','public.Topic.id'])" transform='translate(8,0)' class='unhighlight' d='M 1824,256L 1824,368' >
+	<title>&#x1F517;  Foreign Key Question_topicId_fkey
+Question ref Topic ( topicId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1824,256L 1824,368' ><title>&#x1F517;  Foreign Key Question_topicId_fkey
+Question ref Topic ( topicId -&gt; id )</title></path>
+<text x='1836' y='257' transform='rotate(90 1836,257)' class='relName'>topicId</text>
+<!-- == Fk 'QuestionUser_QuestionUser_questionId_fkey' == -->
+<path id='QuestionUser_QuestionUser_questionId_fkey'  onmouseover="hghl(['QuestionUser_QuestionUser_questionId_fkey','public.QuestionUser.questionId','public.Question.id'])" onmouseout="uhghl(['QuestionUser_QuestionUser_questionId_fkey','public.QuestionUser.questionId','public.Question.id'])" transform='translate(8,0)' class='unhighlight' d='M 2032,96L 1920,96' >
+	<title>&#x1F517;  Foreign Key QuestionUser_questionId_fkey
+QuestionUser ref Question ( questionId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 2032,96L 1920,96' ><title>&#x1F517;  Foreign Key QuestionUser_questionId_fkey
+QuestionUser ref Question ( questionId -&gt; id )</title></path>
+<text x='1981' y='91' transform='rotate(0 1981,91)' class='relName'>questionId</text>
+<!-- == Fk 'QuestionUser_QuestionUser_userId_fkey' == -->
+<path id='QuestionUser_QuestionUser_userId_fkey'  onmouseover="hghl(['QuestionUser_QuestionUser_userId_fkey','public.QuestionUser.userId','public.User.id'])" onmouseout="uhghl(['QuestionUser_QuestionUser_userId_fkey','public.QuestionUser.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 2032,80L 1944,80Q 1936,80 1936,72L 1936,40Q 1936,32 1928,32L 472,32Q 464,32 464,40L 464,64' >
+	<title>&#x1F517;  Foreign Key QuestionUser_userId_fkey
+QuestionUser ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 2032,80L 1944,80Q 1936,80 1936,72L 1936,40Q 1936,32 1928,32L 472,32Q 464,32 464,40L 464,64' ><title>&#x1F517;  Foreign Key QuestionUser_userId_fkey
+QuestionUser ref User ( userId -&gt; id )</title></path>
+<text x='2006' y='75' transform='rotate(0 2006,75)' class='relName'>userId</text>
+<!-- == Fk 'ResetPassowrd_ResetPassowrd_userId_fkey' == -->
+<path id='ResetPassowrd_ResetPassowrd_userId_fkey'  onmouseover="hghl(['ResetPassowrd_ResetPassowrd_userId_fkey','public.ResetPassowrd.userId','public.User.id'])" onmouseout="uhghl(['ResetPassowrd_ResetPassowrd_userId_fkey','public.ResetPassowrd.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 176,416L 176,328Q 176,320 184,320L 360,320Q 368,320 368,312L 368,304' >
+	<title>&#x1F517;  Foreign Key ResetPassowrd_userId_fkey
+ResetPassowrd ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroOne)' marker-end='url(#Arrow)'    d='M 176,416L 176,328Q 176,320 184,320L 360,320Q 368,320 368,312L 368,304' ><title>&#x1F517;  Foreign Key ResetPassowrd_userId_fkey
+ResetPassowrd ref User ( userId -&gt; id )</title></path>
+<text x='179' y='414' transform='rotate(270 179,414)' class='relName'>userId</text>
+<!-- == Fk 'Task_Task_claseId_fkey' == -->
+<path id='Task_Task_claseId_fkey'  onmouseover="hghl(['Task_Task_claseId_fkey','public.Task.claseId','public.Clase.id'])" onmouseout="uhghl(['Task_Task_claseId_fkey','public.Task.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 960,240L 1288,240Q 1296,240 1296,232L 1296,120Q 1296,112 1304,112L 1552,112' >
+	<title>&#x1F517;  Foreign Key Task_claseId_fkey
+Task ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 960,240L 1288,240Q 1296,240 1296,232L 1296,120Q 1296,112 1304,112L 1552,112' ><title>&#x1F517;  Foreign Key Task_claseId_fkey
+Task ref Clase ( claseId -&gt; id )</title></path>
+<text x='969' y='235' transform='rotate(0 969,235)' class='relName'>claseId</text>
+<!-- == Fk 'Task_Task_topicId_fkey' == -->
+<path id='Task_Task_topicId_fkey'  onmouseover="hghl(['Task_Task_topicId_fkey','public.Task.topicId','public.Topic.id'])" onmouseout="uhghl(['Task_Task_topicId_fkey','public.Task.topicId','public.Topic.id'])" transform='translate(8,0)' class='unhighlight' d='M 944,288L 944,328Q 944,336 952,336L 1768,336Q 1776,336 1776,344L 1776,376Q 1776,384 1784,384L 1792,384' >
+	<title>&#x1F517;  Foreign Key Task_topicId_fkey
+Task ref Topic ( topicId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 944,288L 944,328Q 944,336 952,336L 1768,336Q 1776,336 1776,344L 1776,376Q 1776,384 1784,384L 1792,384' ><title>&#x1F517;  Foreign Key Task_topicId_fkey
+Task ref Topic ( topicId -&gt; id )</title></path>
+<text x='956' y='289' transform='rotate(90 956,289)' class='relName'>topicId</text>
+<!-- == Fk 'TaskUser_TaskUser_taskId_fkey' == -->
+<path id='TaskUser_TaskUser_taskId_fkey'  onmouseover="hghl(['TaskUser_TaskUser_taskId_fkey','public.TaskUser.taskId','public.Task.id'])" onmouseout="uhghl(['TaskUser_TaskUser_taskId_fkey','public.TaskUser.taskId','public.Task.id'])" transform='translate(8,0)' class='unhighlight' d='M 1072,96L 960,96' >
+	<title>&#x1F517;  Foreign Key TaskUser_taskId_fkey
+TaskUser ref Task ( taskId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1072,96L 960,96' ><title>&#x1F517;  Foreign Key TaskUser_taskId_fkey
+TaskUser ref Task ( taskId -&gt; id )</title></path>
+<text x='1047' y='91' transform='rotate(0 1047,91)' class='relName'>taskId</text>
+<!-- == Fk 'TaskUser_TaskUser_userId_fkey' == -->
+<path id='TaskUser_TaskUser_userId_fkey'  onmouseover="hghl(['TaskUser_TaskUser_userId_fkey','public.TaskUser.userId','public.User.id'])" onmouseout="uhghl(['TaskUser_TaskUser_userId_fkey','public.TaskUser.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 1072,80L 984,80Q 976,80 976,72L 976,24Q 976,16 968,16L 456,16Q 448,16 448,24L 448,64' >
+	<title>&#x1F517;  Foreign Key TaskUser_userId_fkey
+TaskUser ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1072,80L 984,80Q 976,80 976,72L 976,24Q 976,16 968,16L 456,16Q 448,16 448,24L 448,64' ><title>&#x1F517;  Foreign Key TaskUser_userId_fkey
+TaskUser ref User ( userId -&gt; id )</title></path>
+<text x='1046' y='75' transform='rotate(0 1046,75)' class='relName'>userId</text>
+<!-- == Fk 'Todo_Todo_userId_fkey' == -->
+<path id='Todo_Todo_userId_fkey'  onmouseover="hghl(['Todo_Todo_userId_fkey','public.Todo.userId','public.User.id'])" onmouseout="uhghl(['Todo_Todo_userId_fkey','public.Todo.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 192,128L 304,128' >
+	<title>&#x1F517;  Foreign Key Todo_userId_fkey
+Todo ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 192,128L 304,128' ><title>&#x1F517;  Foreign Key Todo_userId_fkey
+Todo ref User ( userId -&gt; id )</title></path>
+<text x='201' y='123' transform='rotate(0 201,123)' class='relName'>userId</text>
+<!-- == Fk 'Topic_Topic_claseId_fkey' == -->
+<path id='Topic_Topic_claseId_fkey'  onmouseover="hghl(['Topic_Topic_claseId_fkey','public.Topic.claseId','public.Clase.id'])" onmouseout="uhghl(['Topic_Topic_claseId_fkey','public.Topic.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 1792,416L 1704,416Q 1696,416 1696,408L 1696,280Q 1696,272 1688,272L 1672,272Q 1664,272 1664,264L 1664,256' >
+	<title>&#x1F517;  Foreign Key Topic_claseId_fkey
+Topic ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1792,416L 1704,416Q 1696,416 1696,408L 1696,280Q 1696,272 1688,272L 1672,272Q 1664,272 1664,264L 1664,256' ><title>&#x1F517;  Foreign Key Topic_claseId_fkey
+Topic ref Clase ( claseId -&gt; id )</title></path>
+<text x='1762' y='411' transform='rotate(0 1762,411)' class='relName'>claseId</text>
+<!-- == Fk 'UserClase_UserClase_claseId_fkey' == -->
+<path id='UserClase_UserClase_claseId_fkey'  onmouseover="hghl(['UserClase_UserClase_claseId_fkey','public.UserClase.claseId','public.Clase.id'])" onmouseout="uhghl(['UserClase_UserClase_claseId_fkey','public.UserClase.claseId','public.Clase.id'])" transform='translate(8,0)' class='unhighlight' d='M 1440,160L 1552,160' >
+	<title>&#x1F517;  Foreign Key UserClase_claseId_fkey
+UserClase ref Clase ( claseId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1440,160L 1552,160' ><title>&#x1F517;  Foreign Key UserClase_claseId_fkey
+UserClase ref Clase ( claseId -&gt; id )</title></path>
+<text x='1449' y='155' transform='rotate(0 1449,155)' class='relName'>claseId</text>
+<!-- == Fk 'UserClase_UserClase_userId_fkey' == -->
+<path id='UserClase_UserClase_userId_fkey'  onmouseover="hghl(['UserClase_UserClase_userId_fkey','public.UserClase.userId','public.User.id'])" onmouseout="uhghl(['UserClase_UserClase_userId_fkey','public.UserClase.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 1344,256L 1344,296Q 1344,304 1336,304L 504,304Q 496,304 496,296L 496,296Q 496,288 488,288L 480,288' >
+	<title>&#x1F517;  Foreign Key UserClase_userId_fkey
+UserClase ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1344,256L 1344,296Q 1344,304 1336,304L 504,304Q 496,304 496,296L 496,296Q 496,288 488,288L 480,288' ><title>&#x1F517;  Foreign Key UserClase_userId_fkey
+UserClase ref User ( userId -&gt; id )</title></path>
+<text x='1356' y='257' transform='rotate(90 1356,257)' class='relName'>userId</text>
+<!-- == Fk 'Annotation_Annotation_commentId_fkey' == -->
+<path id='Annotation_Annotation_commentId_fkey'  onmouseover="hghl(['Annotation_Annotation_commentId_fkey','public.Annotation.commentId','public.Comment.id'])" onmouseout="uhghl(['Annotation_Annotation_commentId_fkey','public.Annotation.commentId','public.Comment.id'])" transform='translate(8,0)' class='unhighlight' d='M 624,272L 624,384' >
+	<title>&#x1F517;  Foreign Key Annotation_commentId_fkey
+Annotation ref Comment ( commentId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 624,272L 624,384' ><title>&#x1F517;  Foreign Key Annotation_commentId_fkey
+Annotation ref Comment ( commentId -&gt; id )</title></path>
+<text x='636' y='273' transform='rotate(90 636,273)' class='relName'>commentId</text>
+<!-- == Fk 'Annotation_Annotation_materialId_fkey' == -->
+<path id='Annotation_Annotation_materialId_fkey'  onmouseover="hghl(['Annotation_Annotation_materialId_fkey','public.Annotation.materialId','public.Material.id'])" onmouseout="uhghl(['Annotation_Annotation_materialId_fkey','public.Annotation.materialId','public.Material.id'])" transform='translate(8,0)' class='unhighlight' d='M 704,272L 704,344Q 704,352 712,352L 1576,352Q 1584,352 1584,360L 1584,368' >
+	<title>&#x1F517;  Foreign Key Annotation_materialId_fkey
+Annotation ref Material ( materialId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 704,272L 704,344Q 704,352 712,352L 1576,352Q 1584,352 1584,360L 1584,368' ><title>&#x1F517;  Foreign Key Annotation_materialId_fkey
+Annotation ref Material ( materialId -&gt; id )</title></path>
+<text x='716' y='273' transform='rotate(90 716,273)' class='relName'>materialId</text>
+<!-- == Fk 'Annotation_Annotation_questionId_fkey' == -->
+<path id='Annotation_Annotation_questionId_fkey'  onmouseover="hghl(['Annotation_Annotation_questionId_fkey','public.Annotation.questionId','public.Question.id'])" onmouseout="uhghl(['Annotation_Annotation_questionId_fkey','public.Annotation.questionId','public.Question.id'])" transform='translate(8,0)' class='unhighlight' d='M 704,64L 704,56Q 704,48 712,48L 1816,48Q 1824,48 1824,56L 1824,64' >
+	<title>&#x1F517;  Foreign Key Annotation_questionId_fkey
+Annotation ref Question ( questionId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 704,64L 704,56Q 704,48 712,48L 1816,48Q 1824,48 1824,56L 1824,64' ><title>&#x1F517;  Foreign Key Annotation_questionId_fkey
+Annotation ref Question ( questionId -&gt; id )</title></path>
+<text x='707' y='62' transform='rotate(270 707,62)' class='relName'>questionId</text>
+<!-- == Fk 'Annotation_Annotation_taskId_fkey' == -->
+<path id='Annotation_Annotation_taskId_fkey'  onmouseover="hghl(['Annotation_Annotation_taskId_fkey','public.Annotation.taskId','public.Task.id'])" onmouseout="uhghl(['Annotation_Annotation_taskId_fkey','public.Annotation.taskId','public.Task.id'])" transform='translate(8,0)' class='unhighlight' d='M 720,96L 832,96' >
+	<title>&#x1F517;  Foreign Key Annotation_taskId_fkey
+Annotation ref Task ( taskId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'  class='dotted '  d='M 720,96L 832,96' ><title>&#x1F517;  Foreign Key Annotation_taskId_fkey
+Annotation ref Task ( taskId -&gt; id )</title></path>
+<text x='729' y='91' transform='rotate(0 729,91)' class='relName'>taskId</text>
+<!-- == Fk 'Annotation_Annotation_userId_fkey' == -->
+<path id='Annotation_Annotation_userId_fkey'  onmouseover="hghl(['Annotation_Annotation_userId_fkey','public.Annotation.userId','public.User.id'])" onmouseout="uhghl(['Annotation_Annotation_userId_fkey','public.Annotation.userId','public.User.id'])" transform='translate(8,0)' class='unhighlight' d='M 592,96L 480,96' >
+	<title>&#x1F517;  Foreign Key Annotation_userId_fkey
+Annotation ref User ( userId -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 592,96L 480,96' ><title>&#x1F517;  Foreign Key Annotation_userId_fkey
+Annotation ref User ( userId -&gt; id )</title></path>
+<text x='566' y='91' transform='rotate(0 566,91)' class='relName'>userId</text>
+<!-- == Table 'Attendance' == -->
+<rect id='depict_public&#46;Attendance' class='entity' style='stroke:none;' x='1328' y='376' width='112' height='128' rx='4' ry='4' />
+<path d='M 1328 404 L 1328 380 Q 1328 376 1332 376 L 1436 376 Q 1440 376 1440 380 L 1440 404 L1328 404 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='1328' y='376' width='112' height='128' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.Attendance'><text x='1348' y='395' >Attendance</text><title>Table public.Attendance</title></a>
+  <use id='nn' x='1330' y='413' xlink:href='#nn'/><use id='pk' x='1330' y='412' xlink:href='#pk'><title>&#x1F511;  Pk Attendance_pkey ( id ) </title></use><a xlink:href='#public.Attendance_id'><text id='public&#46;Attendance&#46;id' x='1347' y='423'>id</text><title>&#10697;  id
+     * text</title></a>
+<text x='1437' y='420' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1330' y='429' xlink:href='#nn'/><a xlink:href='#public.Attendance_attendance'><text id='public&#46;Attendance&#46;attendance' x='1347' y='439'>attendance</text><title>&#10697;  attendance
+     * boolean</title></a>
+<text x='1437' y='436' text-anchor='end' class='colType'>b</text>  <use id='nn' x='1330' y='445' xlink:href='#nn'/><a xlink:href='#public.Attendance_date'><text id='public&#46;Attendance&#46;date' x='1347' y='455'>date</text><title>&#10697;  date
+     * timestamp(3)</title></a>
+<text x='1437' y='452' text-anchor='end' class='colType'>d</text>  <use id='nn' x='1330' y='461' xlink:href='#nn'/><a xlink:href='#public.Attendance_studentId'><text id='public&#46;Attendance&#46;studentId' x='1347' y='471' onmouseover="hghl(['Attendance_Attendance_studentId_fkey','public.User.id'])" onmouseout="uhghl(['Attendance_Attendance_studentId_fkey','public.User.id'])">studentId</text><title>&#10697;  studentId
+     * text
+ &#8599; Attendance( id )</title></a>
+<a xlink:href='#public.Attendance.studentId'><use id='fk' x='1428' y='460' xlink:href='#fk'/><title>&#x1F517;  References User ( studentId -&gt; id ) </title></a>
+  <use id='nn' x='1330' y='477' xlink:href='#nn'/><a xlink:href='#public.Attendance_claseId'><text id='public&#46;Attendance&#46;claseId' x='1347' y='487' onmouseover="hghl(['Attendance_Attendance_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['Attendance_Attendance_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; Attendance( id )</title></a>
+<a xlink:href='#public.Attendance.claseId'><use id='fk' x='1428' y='476' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+
+<!-- == Table 'Clase' == -->
+<rect id='depict_public&#46;Clase' class='entity' style='stroke:none;' x='1568' y='72' width='112' height='176' rx='4' ry='4' />
+<path d='M 1568 100 L 1568 76 Q 1568 72 1572 72 L 1676 72 Q 1680 72 1680 76 L 1680 100 L1568 100 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='1568' y='72' width='112' height='176' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.Clase'><text x='1605' y='91' >Clase</text><title>Table public.Clase</title></a>
+  <use id='nn' x='1570' y='109' xlink:href='#nn'/><use id='pk' x='1570' y='108' xlink:href='#pk'><title>&#x1F511;  Pk Clase_pkey ( id ) </title></use><a xlink:href='#public.Clase_id'><text id='public&#46;Clase&#46;id' x='1587' y='119' onmouseover="hghl(['Attendance_Attendance_claseId_fkey','public.Attendance.claseId','Comment_Comment_claseId_fkey','public.Comment.claseId','Material_Material_claseId_fkey','public.Material.claseId','Question_Question_claseId_fkey','public.Question.claseId','Task_Task_claseId_fkey','public.Task.claseId','Topic_Topic_claseId_fkey','public.Topic.claseId','UserClase_UserClase_claseId_fkey','public.UserClase.claseId'])" onmouseout="uhghl(['Attendance_Attendance_claseId_fkey','public.Attendance.claseId','Comment_Comment_claseId_fkey','public.Comment.claseId','Material_Material_claseId_fkey','public.Material.claseId','Question_Question_claseId_fkey','public.Question.claseId','Task_Task_claseId_fkey','public.Task.claseId','Topic_Topic_claseId_fkey','public.Topic.claseId','UserClase_UserClase_claseId_fkey','public.UserClase.claseId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Attendance( id )
+ &#8601; Comment( id )
+ &#8601; Material( id )
+ &#8601; Question( id )
+ &#8601; Task( id )
+ &#8601; Topic( id )
+ &#8601; UserClase( id )</title></a>
+<a xlink:href='#public.Clase.id'><use id='ref' x='1668' y='108' xlink:href='#ref'/><title>&#x1F517;  Referred by Attendance ( claseId -&gt; id ) 
+Referred by Comment ( claseId -&gt; id ) 
+Referred by Material ( claseId -&gt; id ) 
+Referred by Question ( claseId -&gt; id ) 
+Referred by Task ( claseId -&gt; id ) 
+Referred by Topic ( claseId -&gt; id ) 
+Referred by UserClase ( claseId -&gt; id ) </title></a>
+  <use id='nn' x='1570' y='125' xlink:href='#nn'/><a xlink:href='#public.Clase_title'><text id='public&#46;Clase&#46;title' x='1587' y='135'>title</text><title>&#10697;  title
+     * text</title></a>
+<text x='1677' y='132' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1570' y='141' xlink:href='#nn'/><a xlink:href='#public.Clase_description'><text id='public&#46;Clase&#46;description' x='1587' y='151'>description</text><title>&#10697;  description
+     * text</title></a>
+<text x='1677' y='148' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1570' y='157' xlink:href='#nn'/><a xlink:href='#public.Clase_teacherId'><text id='public&#46;Clase&#46;teacherId' x='1587' y='167' onmouseover="hghl(['Clase_Clase_teacherId_fkey','public.User.id'])" onmouseout="uhghl(['Clase_Clase_teacherId_fkey','public.User.id'])">teacherId</text><title>&#10697;  teacherId
+     * text
+ &#8599; Clase( id )</title></a>
+<a xlink:href='#public.Clase.teacherId'><use id='fk' x='1668' y='156' xlink:href='#fk'/><title>&#x1F517;  References User ( teacherId -&gt; id ) </title></a>
+  <use id='nn' x='1570' y='173' xlink:href='#nn'/><a xlink:href='#public.Clase_bg'><text id='public&#46;Clase&#46;bg' x='1587' y='183'>bg</text><title>&#10697;  bg
+     * text</title></a>
+<text x='1677' y='180' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Clase_created_at'><text id='public&#46;Clase&#46;created&#95;at' x='1587' y='199'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='1677' y='196' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Clase_updated_at'><text id='public&#46;Clase&#46;updated&#95;at' x='1587' y='215'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='1677' y='212' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Clase_deleted'><text id='public&#46;Clase&#46;deleted' x='1587' y='231'>deleted</text><title>&#10697;  deleted
+     timestamp(3)</title></a>
+<text x='1677' y='228' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'Comment' == -->
+<rect id='depict_public&#46;Comment' class='entity' style='stroke:none;' x='608' y='392' width='112' height='176' rx='4' ry='4' />
+<path d='M 608 420 L 608 396 Q 608 392 612 392 L 716 392 Q 720 392 720 396 L 720 420 L608 420 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='608' y='392' width='112' height='176' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.Comment'><text x='632' y='411' >Comment</text><title>Table public.Comment</title></a>
+  <use id='nn' x='610' y='429' xlink:href='#nn'/><use id='pk' x='610' y='428' xlink:href='#pk'><title>&#x1F511;  Pk Comment_pkey ( id ) </title></use><a xlink:href='#public.Comment_id'><text id='public&#46;Comment&#46;id' x='627' y='439' onmouseover="hghl(['Annotation_Annotation_commentId_fkey','public.Annotation.commentId'])" onmouseout="uhghl(['Annotation_Annotation_commentId_fkey','public.Annotation.commentId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Annotation( id )</title></a>
+<a xlink:href='#public.Comment.id'><use id='ref' x='708' y='428' xlink:href='#ref'/><title>&#x1F517;  Referred by Annotation ( commentId -&gt; id ) </title></a>
+  <use id='nn' x='610' y='445' xlink:href='#nn'/><a xlink:href='#public.Comment_text'><text id='public&#46;Comment&#46;text' x='627' y='455'>text</text><title>&#10697;  text
+     * text</title></a>
+<text x='717' y='452' text-anchor='end' class='colType'>t</text>  <use id='nn' x='610' y='461' xlink:href='#nn'/><a xlink:href='#public.Comment_claseId'><text id='public&#46;Comment&#46;claseId' x='627' y='471' onmouseover="hghl(['Comment_Comment_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['Comment_Comment_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; Comment( id )</title></a>
+<a xlink:href='#public.Comment.claseId'><use id='fk' x='708' y='460' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+  <use id='nn' x='610' y='477' xlink:href='#nn'/><a xlink:href='#public.Comment_userId'><text id='public&#46;Comment&#46;userId' x='627' y='487' onmouseover="hghl(['Comment_Comment_userId_fkey','public.User.id'])" onmouseout="uhghl(['Comment_Comment_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; Comment( id )</title></a>
+<a xlink:href='#public.Comment.userId'><use id='fk' x='708' y='476' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <a xlink:href='#public.Comment_created_at'><text id='public&#46;Comment&#46;created&#95;at' x='627' y='503'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='717' y='500' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Comment_updated_at'><text id='public&#46;Comment&#46;updated&#95;at' x='627' y='519'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='717' y='516' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Comment_files'><text id='public&#46;Comment&#46;files' x='627' y='535'>files</text><title>&#10697;  files
+     text[]</title></a>
+<text x='717' y='532' text-anchor='end' class='colType'>&#91;&#93;</text>  <a xlink:href='#public.Comment_taskId'><text id='public&#46;Comment&#46;taskId' x='627' y='551'>taskId</text><title>&#10697;  taskId
+     text</title></a>
+<text x='717' y='548' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'Material' == -->
+<rect id='depict_public&#46;Material' class='entity' style='stroke:none;' x='1568' y='376' width='112' height='176' rx='4' ry='4' />
+<path d='M 1568 404 L 1568 380 Q 1568 376 1572 376 L 1676 376 Q 1680 376 1680 380 L 1680 404 L1568 404 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='1568' y='376' width='112' height='176' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.Material'><text x='1597' y='395' >Material</text><title>Table public.Material</title></a>
+  <use id='nn' x='1570' y='413' xlink:href='#nn'/><use id='pk' x='1570' y='412' xlink:href='#pk'><title>&#x1F511;  Pk Material_pkey ( id ) </title></use><a xlink:href='#public.Material_id'><text id='public&#46;Material&#46;id' x='1587' y='423' onmouseover="hghl(['Annotation_Annotation_materialId_fkey','public.Annotation.materialId'])" onmouseout="uhghl(['Annotation_Annotation_materialId_fkey','public.Annotation.materialId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Annotation( id )</title></a>
+<a xlink:href='#public.Material.id'><use id='ref' x='1668' y='412' xlink:href='#ref'/><title>&#x1F517;  Referred by Annotation ( materialId -&gt; id ) </title></a>
+  <use id='nn' x='1570' y='429' xlink:href='#nn'/><a xlink:href='#public.Material_title'><text id='public&#46;Material&#46;title' x='1587' y='439'>title</text><title>&#10697;  title
+     * text</title></a>
+<text x='1677' y='436' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Material_description'><text id='public&#46;Material&#46;description' x='1587' y='455'>description</text><title>&#10697;  description
+     text</title></a>
+<text x='1677' y='452' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Material_files'><text id='public&#46;Material&#46;files' x='1587' y='471'>files</text><title>&#10697;  files
+     text[]</title></a>
+<text x='1677' y='468' text-anchor='end' class='colType'>&#91;&#93;</text>  <use id='nn' x='1570' y='477' xlink:href='#nn'/><a xlink:href='#public.Material_topicId'><text id='public&#46;Material&#46;topicId' x='1587' y='487' onmouseover="hghl(['Material_Material_topicId_fkey','public.Topic.id'])" onmouseout="uhghl(['Material_Material_topicId_fkey','public.Topic.id'])">topicId</text><title>&#10697;  topicId
+     * text
+ &#8599; Material( id )</title></a>
+<a xlink:href='#public.Material.topicId'><use id='fk' x='1668' y='476' xlink:href='#fk'/><title>&#x1F517;  References Topic ( topicId -&gt; id ) </title></a>
+  <use id='nn' x='1570' y='493' xlink:href='#nn'/><a xlink:href='#public.Material_claseId'><text id='public&#46;Material&#46;claseId' x='1587' y='503' onmouseover="hghl(['Material_Material_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['Material_Material_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; Material( id )</title></a>
+<a xlink:href='#public.Material.claseId'><use id='fk' x='1668' y='492' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+  <a xlink:href='#public.Material_created_at'><text id='public&#46;Material&#46;created&#95;at' x='1587' y='519'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='1677' y='516' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Material_updated_at'><text id='public&#46;Material&#46;updated&#95;at' x='1587' y='535'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='1677' y='532' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'Message' == -->
+<rect id='depict_public&#46;Message' class='entity' style='stroke:none;' x='320' y='424' width='96' height='128' rx='4' ry='4' />
+<path d='M 320 452 L 320 428 Q 320 424 324 424 L 412 424 Q 416 424 416 428 L 416 452 L320 452 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='320' y='424' width='96' height='128' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.Message'><text x='339' y='443' >Message</text><title>Table public.Message</title></a>
+  <use id='nn' x='322' y='461' xlink:href='#nn'/><use id='pk' x='322' y='460' xlink:href='#pk'><title>&#x1F511;  Pk Message_pkey ( id ) </title></use><a xlink:href='#public.Message_id'><text id='public&#46;Message&#46;id' x='339' y='471'>id</text><title>&#10697;  id
+     * text</title></a>
+<text x='413' y='468' text-anchor='end' class='colType'>t</text>  <use id='nn' x='322' y='477' xlink:href='#nn'/><a xlink:href='#public.Message_senderId'><text id='public&#46;Message&#46;senderId' x='339' y='487' onmouseover="hghl(['Message_Message_senderId_fkey','public.User.id'])" onmouseout="uhghl(['Message_Message_senderId_fkey','public.User.id'])">senderId</text><title>&#10697;  senderId
+     * text
+ &#8599; Message( id )</title></a>
+<a xlink:href='#public.Message.senderId'><use id='fk' x='404' y='476' xlink:href='#fk'/><title>&#x1F517;  References User ( senderId -&gt; id ) </title></a>
+  <use id='nn' x='322' y='493' xlink:href='#nn'/><a xlink:href='#public.Message_reciberId'><text id='public&#46;Message&#46;reciberId' x='339' y='503' onmouseover="hghl(['Message_Message_reciberId_fkey','public.User.id'])" onmouseout="uhghl(['Message_Message_reciberId_fkey','public.User.id'])">reciberId</text><title>&#10697;  reciberId
+     * text
+ &#8599; Message( id )</title></a>
+<a xlink:href='#public.Message.reciberId'><use id='fk' x='404' y='492' xlink:href='#fk'/><title>&#x1F517;  References User ( reciberId -&gt; id ) </title></a>
+  <use id='nn' x='322' y='509' xlink:href='#nn'/><a xlink:href='#public.Message_content'><text id='public&#46;Message&#46;content' x='339' y='519'>content</text><title>&#10697;  content
+     * text</title></a>
+<text x='413' y='516' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Message_created_at'><text id='public&#46;Message&#46;created&#95;at' x='339' y='535'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='413' y='532' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'Question' == -->
+<rect id='depict_public&#46;Question' class='entity' style='stroke:none;' x='1808' y='72' width='112' height='176' rx='4' ry='4' />
+<path d='M 1808 100 L 1808 76 Q 1808 72 1812 72 L 1916 72 Q 1920 72 1920 76 L 1920 100 L1808 100 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='1808' y='72' width='112' height='176' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.Question'><text x='1834' y='91' >Question</text><title>Table public.Question</title></a>
+  <use id='nn' x='1810' y='109' xlink:href='#nn'/><use id='pk' x='1810' y='108' xlink:href='#pk'><title>&#x1F511;  Pk Question_pkey ( id ) </title></use><a xlink:href='#public.Question_id'><text id='public&#46;Question&#46;id' x='1827' y='119' onmouseover="hghl(['Annotation_Annotation_questionId_fkey','public.Annotation.questionId','QuestionUser_QuestionUser_questionId_fkey','public.QuestionUser.questionId'])" onmouseout="uhghl(['Annotation_Annotation_questionId_fkey','public.Annotation.questionId','QuestionUser_QuestionUser_questionId_fkey','public.QuestionUser.questionId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Annotation( id )
+ &#8601; QuestionUser( id )</title></a>
+<a xlink:href='#public.Question.id'><use id='ref' x='1908' y='108' xlink:href='#ref'/><title>&#x1F517;  Referred by Annotation ( questionId -&gt; id ) 
+Referred by QuestionUser ( questionId -&gt; id ) </title></a>
+  <use id='nn' x='1810' y='125' xlink:href='#nn'/><a xlink:href='#public.Question_question'><text id='public&#46;Question&#46;question' x='1827' y='135'>question</text><title>&#10697;  question
+     * text</title></a>
+<text x='1917' y='132' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Question_score'><text id='public&#46;Question&#46;score' x='1827' y='151'>score</text><title>&#10697;  score
+     integer</title></a>
+<text x='1917' y='148' text-anchor='end' class='colType'>&#35;</text>  <a xlink:href='#public.Question_dueDate'><text id='public&#46;Question&#46;dueDate' x='1827' y='167'>dueDate</text><title>&#10697;  dueDate
+     timestamp(3)</title></a>
+<text x='1917' y='164' text-anchor='end' class='colType'>d</text>  <use id='nn' x='1810' y='173' xlink:href='#nn'/><a xlink:href='#public.Question_topicId'><text id='public&#46;Question&#46;topicId' x='1827' y='183' onmouseover="hghl(['Question_Question_topicId_fkey','public.Topic.id'])" onmouseout="uhghl(['Question_Question_topicId_fkey','public.Topic.id'])">topicId</text><title>&#10697;  topicId
+     * text
+ &#8599; Question( id )</title></a>
+<a xlink:href='#public.Question.topicId'><use id='fk' x='1908' y='172' xlink:href='#fk'/><title>&#x1F517;  References Topic ( topicId -&gt; id ) </title></a>
+  <use id='nn' x='1810' y='189' xlink:href='#nn'/><a xlink:href='#public.Question_claseId'><text id='public&#46;Question&#46;claseId' x='1827' y='199' onmouseover="hghl(['Question_Question_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['Question_Question_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; Question( id )</title></a>
+<a xlink:href='#public.Question.claseId'><use id='fk' x='1908' y='188' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+  <a xlink:href='#public.Question_created_at'><text id='public&#46;Question&#46;created&#95;at' x='1827' y='215'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='1917' y='212' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Question_updated_at'><text id='public&#46;Question&#46;updated&#95;at' x='1827' y='231'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='1917' y='228' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'QuestionUser' == -->
+<rect id='depict_public&#46;QuestionUser' class='entity' style='stroke:none;' x='2048' y='72' width='112' height='112' rx='4' ry='4' />
+<path d='M 2048 100 L 2048 76 Q 2048 72 2052 72 L 2156 72 Q 2160 72 2160 76 L 2160 100 L2048 100 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='2048' y='72' width='112' height='112' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.QuestionUser'><text x='2062' y='91' >QuestionUser</text><title>Table public.QuestionUser</title></a>
+  <use id='nn' x='2050' y='109' xlink:href='#nn'/><a xlink:href='#public.QuestionUser_id'><text id='public&#46;QuestionUser&#46;id' x='2067' y='119'>id</text><title>&#10697;  id
+     * integer default nextval(&apos;&quot;QuestionUser_id_seq&quot;&apos;::regclass)</title></a>
+<text x='2157' y='116' text-anchor='end' class='colType'>&#35;</text>  <use id='nn' x='2050' y='125' xlink:href='#nn'/><use id='pk' x='2050' y='124' xlink:href='#pk'><title>&#x1F511;  Pk QuestionUser_pkey ( userId, questionId ) </title></use><a xlink:href='#public.QuestionUser_userId'><text id='public&#46;QuestionUser&#46;userId' x='2067' y='135' onmouseover="hghl(['QuestionUser_QuestionUser_userId_fkey','public.User.id'])" onmouseout="uhghl(['QuestionUser_QuestionUser_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; QuestionUser( id )</title></a>
+<a xlink:href='#public.QuestionUser.userId'><use id='fk' x='2148' y='124' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <use id='nn' x='2050' y='141' xlink:href='#nn'/><use id='pk' x='2050' y='140' xlink:href='#pk'><title>&#x1F511;  Pk QuestionUser_pkey ( userId, questionId ) </title></use><a xlink:href='#public.QuestionUser_questionId'><text id='public&#46;QuestionUser&#46;questionId' x='2067' y='151' onmouseover="hghl(['QuestionUser_QuestionUser_questionId_fkey','public.Question.id'])" onmouseout="uhghl(['QuestionUser_QuestionUser_questionId_fkey','public.Question.id'])">questionId</text><title>&#10697;  questionId
+     * text
+ &#8599; QuestionUser( id )</title></a>
+<a xlink:href='#public.QuestionUser.questionId'><use id='fk' x='2148' y='140' xlink:href='#fk'/><title>&#x1F517;  References Question ( questionId -&gt; id ) </title></a>
+  <use id='nn' x='2050' y='157' xlink:href='#nn'/><a xlink:href='#public.QuestionUser_completed'><text id='public&#46;QuestionUser&#46;completed' x='2067' y='167'>completed</text><title>&#10697;  completed
+     * boolean default false</title></a>
+<text x='2157' y='164' text-anchor='end' class='colType'>b</text>
+<!-- == Table 'ResetPassowrd' == -->
+<rect id='depict_public&#46;ResetPassowrd' class='entity' style='stroke:none;' x='80' y='424' width='112' height='96' rx='4' ry='4' />
+<path d='M 80 452 L 80 428 Q 80 424 84 424 L 188 424 Q 192 424 192 428 L 192 452 L80 452 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='80' y='424' width='112' height='96' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.ResetPassowrd'><text x='90' y='443' >ResetPassowrd</text><title>Table public.ResetPassowrd</title></a>
+  <use id='nn' x='82' y='461' xlink:href='#nn'/><use id='pk' x='82' y='460' xlink:href='#pk'><title>&#x1F511;  Pk ResetPassowrd_pkey ( userId ) </title></use><a xlink:href='#public.ResetPassowrd_userId'><text id='public&#46;ResetPassowrd&#46;userId' x='99' y='471' onmouseover="hghl(['ResetPassowrd_ResetPassowrd_userId_fkey','public.User.id'])" onmouseout="uhghl(['ResetPassowrd_ResetPassowrd_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; ResetPassowrd( id )</title></a>
+<a xlink:href='#public.ResetPassowrd.userId'><use id='fk' x='180' y='460' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <use id='nn' x='82' y='477' xlink:href='#nn'/><a xlink:href='#public.ResetPassowrd_code'><text id='public&#46;ResetPassowrd&#46;code' x='99' y='487'>code</text><title>&#10697;  code
+     * text</title></a>
+<text x='189' y='484' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.ResetPassowrd_created_at'><text id='public&#46;ResetPassowrd&#46;created&#95;at' x='99' y='503'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='189' y='500' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'Task' == -->
+<rect id='depict_public&#46;Task' class='entity' style='stroke:none;' x='848' y='72' width='112' height='208' rx='4' ry='4' />
+<path d='M 848 100 L 848 76 Q 848 72 852 72 L 956 72 Q 960 72 960 76 L 960 100 L848 100 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='848' y='72' width='112' height='208' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.Task'><text x='888' y='91' >Task</text><title>Table public.Task</title></a>
+  <use id='nn' x='850' y='109' xlink:href='#nn'/><use id='pk' x='850' y='108' xlink:href='#pk'><title>&#x1F511;  Pk Task_pkey ( id ) </title></use><a xlink:href='#public.Task_id'><text id='public&#46;Task&#46;id' x='867' y='119' onmouseover="hghl(['Annotation_Annotation_taskId_fkey','public.Annotation.taskId','TaskUser_TaskUser_taskId_fkey','public.TaskUser.taskId'])" onmouseout="uhghl(['Annotation_Annotation_taskId_fkey','public.Annotation.taskId','TaskUser_TaskUser_taskId_fkey','public.TaskUser.taskId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Annotation( id )
+ &#8601; TaskUser( id )</title></a>
+<a xlink:href='#public.Task.id'><use id='ref' x='948' y='108' xlink:href='#ref'/><title>&#x1F517;  Referred by Annotation ( taskId -&gt; id ) 
+Referred by TaskUser ( taskId -&gt; id ) </title></a>
+  <use id='nn' x='850' y='125' xlink:href='#nn'/><a xlink:href='#public.Task_title'><text id='public&#46;Task&#46;title' x='867' y='135'>title</text><title>&#10697;  title
+     * text</title></a>
+<text x='957' y='132' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Task_description'><text id='public&#46;Task&#46;description' x='867' y='151'>description</text><title>&#10697;  description
+     text</title></a>
+<text x='957' y='148' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Task_dueDate'><text id='public&#46;Task&#46;dueDate' x='867' y='167'>dueDate</text><title>&#10697;  dueDate
+     timestamp(3)</title></a>
+<text x='957' y='164' text-anchor='end' class='colType'>d</text>  <use id='nn' x='850' y='173' xlink:href='#nn'/><a xlink:href='#public.Task_topicId'><text id='public&#46;Task&#46;topicId' x='867' y='183' onmouseover="hghl(['Task_Task_topicId_fkey','public.Topic.id'])" onmouseout="uhghl(['Task_Task_topicId_fkey','public.Topic.id'])">topicId</text><title>&#10697;  topicId
+     * text
+ &#8599; Task( id )</title></a>
+<a xlink:href='#public.Task.topicId'><use id='fk' x='948' y='172' xlink:href='#fk'/><title>&#x1F517;  References Topic ( topicId -&gt; id ) </title></a>
+  <a xlink:href='#public.Task_score'><text id='public&#46;Task&#46;score' x='867' y='199'>score</text><title>&#10697;  score
+     integer</title></a>
+<text x='957' y='196' text-anchor='end' class='colType'>&#35;</text>  <a xlink:href='#public.Task_files'><text id='public&#46;Task&#46;files' x='867' y='215'>files</text><title>&#10697;  files
+     text[]</title></a>
+<text x='957' y='212' text-anchor='end' class='colType'>&#91;&#93;</text>  <use id='nn' x='850' y='221' xlink:href='#nn'/><a xlink:href='#public.Task_claseId'><text id='public&#46;Task&#46;claseId' x='867' y='231' onmouseover="hghl(['Task_Task_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['Task_Task_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; Task( id )</title></a>
+<a xlink:href='#public.Task.claseId'><use id='fk' x='948' y='220' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+  <a xlink:href='#public.Task_created_at'><text id='public&#46;Task&#46;created&#95;at' x='867' y='247'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='957' y='244' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Task_updated_at'><text id='public&#46;Task&#46;updated&#95;at' x='867' y='263'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='957' y='260' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'TaskUser' == -->
+<rect id='depict_public&#46;TaskUser' class='entity' style='stroke:none;' x='1088' y='72' width='112' height='144' rx='4' ry='4' />
+<path d='M 1088 100 L 1088 76 Q 1088 72 1092 72 L 1196 72 Q 1200 72 1200 76 L 1200 100 L1088 100 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='1088' y='72' width='112' height='144' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.TaskUser'><text x='1115' y='91' >TaskUser</text><title>Table public.TaskUser</title></a>
+  <use id='nn' x='1090' y='109' xlink:href='#nn'/><a xlink:href='#public.TaskUser_id'><text id='public&#46;TaskUser&#46;id' x='1107' y='119'>id</text><title>&#10697;  id
+     * integer default nextval(&apos;&quot;TaskUser_id_seq&quot;&apos;::regclass)</title></a>
+<text x='1197' y='116' text-anchor='end' class='colType'>&#35;</text>  <use id='nn' x='1090' y='125' xlink:href='#nn'/><use id='pk' x='1090' y='124' xlink:href='#pk'><title>&#x1F511;  Pk TaskUser_pkey ( userId, taskId ) </title></use><a xlink:href='#public.TaskUser_userId'><text id='public&#46;TaskUser&#46;userId' x='1107' y='135' onmouseover="hghl(['TaskUser_TaskUser_userId_fkey','public.User.id'])" onmouseout="uhghl(['TaskUser_TaskUser_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; TaskUser( id )</title></a>
+<a xlink:href='#public.TaskUser.userId'><use id='fk' x='1188' y='124' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <a xlink:href='#public.TaskUser_files'><text id='public&#46;TaskUser&#46;files' x='1107' y='151'>files</text><title>&#10697;  files
+     text[]</title></a>
+<text x='1197' y='148' text-anchor='end' class='colType'>&#91;&#93;</text>  <a xlink:href='#public.TaskUser_grade'><text id='public&#46;TaskUser&#46;grade' x='1107' y='167'>grade</text><title>&#10697;  grade
+     integer</title></a>
+<text x='1197' y='164' text-anchor='end' class='colType'>&#35;</text>  <use id='nn' x='1090' y='173' xlink:href='#nn'/><use id='pk' x='1090' y='172' xlink:href='#pk'><title>&#x1F511;  Pk TaskUser_pkey ( userId, taskId ) </title></use><a xlink:href='#public.TaskUser_taskId'><text id='public&#46;TaskUser&#46;taskId' x='1107' y='183' onmouseover="hghl(['TaskUser_TaskUser_taskId_fkey','public.Task.id'])" onmouseout="uhghl(['TaskUser_TaskUser_taskId_fkey','public.Task.id'])">taskId</text><title>&#10697;  taskId
+     * text
+ &#8599; TaskUser( id )</title></a>
+<a xlink:href='#public.TaskUser.taskId'><use id='fk' x='1188' y='172' xlink:href='#fk'/><title>&#x1F517;  References Task ( taskId -&gt; id ) </title></a>
+  <use id='nn' x='1090' y='189' xlink:href='#nn'/><a xlink:href='#public.TaskUser_completed'><text id='public&#46;TaskUser&#46;completed' x='1107' y='199'>completed</text><title>&#10697;  completed
+     * boolean default false</title></a>
+<text x='1197' y='196' text-anchor='end' class='colType'>b</text>
+<!-- == Table 'Todo' == -->
+<rect id='depict_public&#46;Todo' class='entity' style='stroke:none;' x='48' y='104' width='144' height='192' rx='4' ry='4' />
+<path d='M 48 132 L 48 108 Q 48 104 52 104 L 188 104 Q 192 104 192 108 L 192 132 L48 132 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='48' y='104' width='144' height='192' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.Todo'><text x='102' y='123' >Todo</text><title>Table public.Todo</title></a>
+  <use id='nn' x='50' y='141' xlink:href='#nn'/><use id='pk' x='50' y='140' xlink:href='#pk'><title>&#x1F511;  Pk Todo_pkey ( id ) </title></use><a xlink:href='#public.Todo_id'><text id='public&#46;Todo&#46;id' x='67' y='151'>id</text><title>&#10697;  id
+     * text</title></a>
+<text x='189' y='148' text-anchor='end' class='colType'>t</text>  <use id='nn' x='50' y='157' xlink:href='#nn'/><a xlink:href='#public.Todo_title'><text id='public&#46;Todo&#46;title' x='67' y='167'>title</text><title>&#10697;  title
+     * text</title></a>
+<text x='189' y='164' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Todo_execute_day'><text id='public&#46;Todo&#46;execute&#95;day' x='67' y='183'>execute&#95;day</text><title>&#10697;  execute_day
+     timestamp(3)</title></a>
+<text x='189' y='180' text-anchor='end' class='colType'>d</text>  <use id='nn' x='50' y='189' xlink:href='#nn'/><a xlink:href='#public.Todo_completed'><text id='public&#46;Todo&#46;completed' x='67' y='199'>completed</text><title>&#10697;  completed
+     * boolean default false</title></a>
+<text x='189' y='196' text-anchor='end' class='colType'>b</text>  <a xlink:href='#public.Todo_notification_time'><text id='public&#46;Todo&#46;notification&#95;time' x='67' y='215'>notification&#95;time</text><title>&#10697;  notification_time
+     timestamp(3)</title></a>
+<text x='189' y='212' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Todo_event_day'><text id='public&#46;Todo&#46;event&#95;day' x='67' y='231'>event&#95;day</text><title>&#10697;  event_day
+     timestamp(3)</title></a>
+<text x='189' y='228' text-anchor='end' class='colType'>d</text>  <use id='nn' x='50' y='237' xlink:href='#nn'/><a xlink:href='#public.Todo_userId'><text id='public&#46;Todo&#46;userId' x='67' y='247' onmouseover="hghl(['Todo_Todo_userId_fkey','public.User.id'])" onmouseout="uhghl(['Todo_Todo_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; Todo( id )</title></a>
+<a xlink:href='#public.Todo.userId'><use id='fk' x='180' y='236' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <a xlink:href='#public.Todo_created_at'><text id='public&#46;Todo&#46;created&#95;at' x='67' y='263'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='189' y='260' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Todo_updated_at'><text id='public&#46;Todo&#46;updated&#95;at' x='67' y='279'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='189' y='276' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'Topic' == -->
+<rect id='depict_public&#46;Topic' class='entity' style='stroke:none;' x='1808' y='376' width='112' height='128' rx='4' ry='4' />
+<path d='M 1808 404 L 1808 380 Q 1808 376 1812 376 L 1916 376 Q 1920 376 1920 380 L 1920 404 L1808 404 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='1808' y='376' width='112' height='128' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.Topic'><text x='1845' y='395' >Topic</text><title>Table public.Topic</title></a>
+  <use id='nn' x='1810' y='413' xlink:href='#nn'/><use id='pk' x='1810' y='412' xlink:href='#pk'><title>&#x1F511;  Pk Topic_pkey ( id ) </title></use><a xlink:href='#public.Topic_id'><text id='public&#46;Topic&#46;id' x='1827' y='423' onmouseover="hghl(['Material_Material_topicId_fkey','public.Material.topicId','Question_Question_topicId_fkey','public.Question.topicId','Task_Task_topicId_fkey','public.Task.topicId'])" onmouseout="uhghl(['Material_Material_topicId_fkey','public.Material.topicId','Question_Question_topicId_fkey','public.Question.topicId','Task_Task_topicId_fkey','public.Task.topicId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Material( id )
+ &#8601; Question( id )
+ &#8601; Task( id )</title></a>
+<a xlink:href='#public.Topic.id'><use id='ref' x='1908' y='412' xlink:href='#ref'/><title>&#x1F517;  Referred by Material ( topicId -&gt; id ) 
+Referred by Question ( topicId -&gt; id ) 
+Referred by Task ( topicId -&gt; id ) </title></a>
+  <use id='nn' x='1810' y='429' xlink:href='#nn'/><a xlink:href='#public.Topic_title'><text id='public&#46;Topic&#46;title' x='1827' y='439'>title</text><title>&#10697;  title
+     * text</title></a>
+<text x='1917' y='436' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1810' y='445' xlink:href='#nn'/><a xlink:href='#public.Topic_claseId'><text id='public&#46;Topic&#46;claseId' x='1827' y='455' onmouseover="hghl(['Topic_Topic_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['Topic_Topic_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; Topic( id )</title></a>
+<a xlink:href='#public.Topic.claseId'><use id='fk' x='1908' y='444' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+  <a xlink:href='#public.Topic_created_at'><text id='public&#46;Topic&#46;created&#95;at' x='1827' y='471'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='1917' y='468' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Topic_updated_at'><text id='public&#46;Topic&#46;updated&#95;at' x='1827' y='487'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='1917' y='484' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'User' == -->
+<rect id='depict_public&#46;User' class='entity' style='stroke:none;' x='320' y='72' width='160' height='224' rx='4' ry='4' />
+<path d='M 320 100 L 320 76 Q 320 72 324 72 L 476 72 Q 480 72 480 76 L 480 100 L320 100 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='320' y='72' width='160' height='224' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.User'><text x='384' y='91' >User</text><title>Table public.User</title></a>
+  <use id='nn' x='322' y='109' xlink:href='#nn'/><use id='pk' x='322' y='108' xlink:href='#pk'><title>&#x1F511;  Pk User_pkey ( id ) </title></use><a xlink:href='#public.User_id'><text id='public&#46;User&#46;id' x='339' y='119' onmouseover="hghl(['Annotation_Annotation_userId_fkey','public.Annotation.userId','Attendance_Attendance_studentId_fkey','public.Attendance.studentId','Clase_Clase_teacherId_fkey','public.Clase.teacherId','Comment_Comment_userId_fkey','public.Comment.userId','Message_Message_reciberId_fkey','public.Message.reciberId','Message_Message_senderId_fkey','public.Message.senderId','QuestionUser_QuestionUser_userId_fkey','public.QuestionUser.userId','ResetPassowrd_ResetPassowrd_userId_fkey','public.ResetPassowrd.userId','TaskUser_TaskUser_userId_fkey','public.TaskUser.userId','Todo_Todo_userId_fkey','public.Todo.userId','UserClase_UserClase_userId_fkey','public.UserClase.userId'])" onmouseout="uhghl(['Annotation_Annotation_userId_fkey','public.Annotation.userId','Attendance_Attendance_studentId_fkey','public.Attendance.studentId','Clase_Clase_teacherId_fkey','public.Clase.teacherId','Comment_Comment_userId_fkey','public.Comment.userId','Message_Message_reciberId_fkey','public.Message.reciberId','Message_Message_senderId_fkey','public.Message.senderId','QuestionUser_QuestionUser_userId_fkey','public.QuestionUser.userId','ResetPassowrd_ResetPassowrd_userId_fkey','public.ResetPassowrd.userId','TaskUser_TaskUser_userId_fkey','public.TaskUser.userId','Todo_Todo_userId_fkey','public.Todo.userId','UserClase_UserClase_userId_fkey','public.UserClase.userId'])">id</text><title>&#10697;  id
+     * text
+ &#8601; Annotation( id )
+ &#8601; Attendance( id )
+ &#8601; Clase( id )
+ &#8601; Comment( id )
+ &#8601; Message( id )
+ &#8601; Message( id )
+ &#8601; QuestionUser( id )
+ &#8601; ResetPassowrd( id )
+ &#8601; TaskUser( id )
+ &#8601; Todo( id )
+ &#8601; UserClase( id )</title></a>
+<a xlink:href='#public.User.id'><use id='ref' x='468' y='108' xlink:href='#ref'/><title>&#x1F517;  Referred by Annotation ( userId -&gt; id ) 
+Referred by Attendance ( studentId -&gt; id ) 
+Referred by Clase ( teacherId -&gt; id ) 
+Referred by Comment ( userId -&gt; id ) 
+Referred by Message ( reciberId -&gt; id ) 
+Referred by Message ( senderId -&gt; id ) 
+Referred by QuestionUser ( userId -&gt; id ) 
+Referred by ResetPassowrd ( userId -&gt; id ) 
+Referred by TaskUser ( userId -&gt; id ) 
+Referred by Todo ( userId -&gt; id ) 
+Referred by UserClase ( userId -&gt; id ) </title></a>
+  <use id='nn' x='322' y='125' xlink:href='#nn'/><a xlink:href='#public.User_name'><text id='public&#46;User&#46;name' x='339' y='135'>name</text><title>&#10697;  name
+     * text</title></a>
+<text x='477' y='132' text-anchor='end' class='colType'>t</text>  <use id='nn' x='322' y='141' xlink:href='#nn'/><a xlink:href='#public.User_surname'><text id='public&#46;User&#46;surname' x='339' y='151'>surname</text><title>&#10697;  surname
+     * text</title></a>
+<text x='477' y='148' text-anchor='end' class='colType'>t</text>  <use id='nn' x='322' y='157' xlink:href='#nn'/><a xlink:href='#public.User_phone'><text id='public&#46;User&#46;phone' x='339' y='167'>phone</text><title>&#10697;  phone
+     * text</title></a>
+<text x='477' y='164' text-anchor='end' class='colType'>t</text>  <use id='nn' x='322' y='173' xlink:href='#nn'/><use id='unq' x='322' y='172' xlink:href='#unq'><title>&#x1F50D;  Unq User_email_key ( email ) </title></use><a xlink:href='#public.User_email'><text id='public&#46;User&#46;email' x='339' y='183'>email</text><title>&#10697;  email
+     * text</title></a>
+<text x='477' y='180' text-anchor='end' class='colType'>t</text>  <use id='nn' x='322' y='189' xlink:href='#nn'/><a xlink:href='#public.User_password'><text id='public&#46;User&#46;password' x='339' y='199'>password</text><title>&#10697;  password
+     * text</title></a>
+<text x='477' y='196' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.User_avatar'><text id='public&#46;User&#46;avatar' x='339' y='215'>avatar</text><title>&#10697;  avatar
+     text</title></a>
+<text x='477' y='212' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.User_created_at'><text id='public&#46;User&#46;created&#95;at' x='339' y='231'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='477' y='228' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.User_updated_at'><text id='public&#46;User&#46;updated&#95;at' x='339' y='247'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='477' y='244' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.User_deleted'><text id='public&#46;User&#46;deleted' x='339' y='263'>deleted</text><title>&#10697;  deleted
+     timestamp(3)</title></a>
+<text x='477' y='260' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.User_notifications_token'><text id='public&#46;User&#46;notifications&#95;token' x='339' y='279'>notifications&#95;token</text><title>&#10697;  notifications_token
+     text[]</title></a>
+<text x='477' y='276' text-anchor='end' class='colType'>&#91;&#93;</text>
+<!-- == Table 'UserClase' == -->
+<rect id='depict_public&#46;UserClase' class='entity' style='stroke:none;' x='1328' y='136' width='112' height='112' rx='4' ry='4' />
+<path d='M 1328 164 L 1328 140 Q 1328 136 1332 136 L 1436 136 Q 1440 136 1440 140 L 1440 164 L1328 164 ' style='fill:url(#tbg_C7F4BE);stroke-width:0;' />
+<rect class='entity' x='1328' y='136' width='112' height='112' rx='4' ry='4' style='fill:none;stroke:#E3F2E1'/>
+<a xlink:href='#public.UserClase'><text x='1353' y='155' >UserClase</text><title>Table public.UserClase</title></a>
+  <use id='nn' x='1330' y='173' xlink:href='#nn'/><a xlink:href='#public.UserClase_id'><text id='public&#46;UserClase&#46;id' x='1347' y='183'>id</text><title>&#10697;  id
+     * integer default nextval(&apos;&quot;UserClase_id_seq&quot;&apos;::regclass)</title></a>
+<text x='1437' y='180' text-anchor='end' class='colType'>&#35;</text>  <use id='nn' x='1330' y='189' xlink:href='#nn'/><use id='pk' x='1330' y='188' xlink:href='#pk'><title>&#x1F511;  Pk UserClase_pkey ( userId, claseId ) </title></use><a xlink:href='#public.UserClase_userId'><text id='public&#46;UserClase&#46;userId' x='1347' y='199' onmouseover="hghl(['UserClase_UserClase_userId_fkey','public.User.id'])" onmouseout="uhghl(['UserClase_UserClase_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; UserClase( id )</title></a>
+<a xlink:href='#public.UserClase.userId'><use id='fk' x='1428' y='188' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <use id='nn' x='1330' y='205' xlink:href='#nn'/><use id='pk' x='1330' y='204' xlink:href='#pk'><title>&#x1F511;  Pk UserClase_pkey ( userId, claseId ) </title></use><a xlink:href='#public.UserClase_claseId'><text id='public&#46;UserClase&#46;claseId' x='1347' y='215' onmouseover="hghl(['UserClase_UserClase_claseId_fkey','public.Clase.id'])" onmouseout="uhghl(['UserClase_UserClase_claseId_fkey','public.Clase.id'])">claseId</text><title>&#10697;  claseId
+     * text
+ &#8599; UserClase( id )</title></a>
+<a xlink:href='#public.UserClase.claseId'><use id='fk' x='1428' y='204' xlink:href='#fk'/><title>&#x1F517;  References Clase ( claseId -&gt; id ) </title></a>
+  <use id='nn' x='1330' y='221' xlink:href='#nn'/><a xlink:href='#public.UserClase_assignedAt'><text id='public&#46;UserClase&#46;assignedAt' x='1347' y='231'>assignedAt</text><title>&#10697;  assignedAt
+     * timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='1437' y='228' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'Annotation' == -->
+<rect id='depict_public&#46;Annotation' class='entity' style='stroke:none;' x='608' y='72' width='112' height='192' rx='4' ry='4' />
+<path d='M 608 100 L 608 76 Q 608 72 612 72 L 716 72 Q 720 72 720 76 L 720 100 L608 100 ' style='fill:url(#tbg_BED3F4);stroke-width:0;' />
+<rect class='entity' x='608' y='72' width='112' height='192' rx='4' ry='4' style='fill:none;stroke:#E1E7F2'/>
+<a xlink:href='#public.Annotation'><text x='628' y='91' >Annotation</text><title>Table public.Annotation</title></a>
+  <use id='nn' x='610' y='109' xlink:href='#nn'/><use id='pk' x='610' y='108' xlink:href='#pk'><title>&#x1F511;  Pk Annotation_pkey ( id ) </title></use><a xlink:href='#public.Annotation_id'><text id='public&#46;Annotation&#46;id' x='627' y='119'>id</text><title>&#10697;  id
+     * text</title></a>
+<text x='717' y='116' text-anchor='end' class='colType'>t</text>  <use id='nn' x='610' y='125' xlink:href='#nn'/><a xlink:href='#public.Annotation_text'><text id='public&#46;Annotation&#46;text' x='627' y='135'>text</text><title>&#10697;  text
+     * text</title></a>
+<text x='717' y='132' text-anchor='end' class='colType'>t</text>  <a xlink:href='#public.Annotation_created_at'><text id='public&#46;Annotation&#46;created&#95;at' x='627' y='151'>created&#95;at</text><title>&#10697;  created_at
+     timestamptz default CURRENT_TIMESTAMP</title></a>
+<text x='717' y='148' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Annotation_updated_at'><text id='public&#46;Annotation&#46;updated&#95;at' x='627' y='167'>updated&#95;at</text><title>&#10697;  updated_at
+     timestamp(3) default CURRENT_TIMESTAMP</title></a>
+<text x='717' y='164' text-anchor='end' class='colType'>d</text>  <a xlink:href='#public.Annotation_commentId'><text id='public&#46;Annotation&#46;commentId' x='627' y='183' onmouseover="hghl(['Annotation_Annotation_commentId_fkey','public.Comment.id'])" onmouseout="uhghl(['Annotation_Annotation_commentId_fkey','public.Comment.id'])">commentId</text><title>&#10697;  commentId
+     text
+ &#8599; Annotation( id )</title></a>
+<a xlink:href='#public.Annotation.commentId'><use id='fk' x='708' y='172' xlink:href='#fk'/><title>&#x1F517;  References Comment ( commentId -&gt; id ) </title></a>
+  <a xlink:href='#public.Annotation_materialId'><text id='public&#46;Annotation&#46;materialId' x='627' y='199' onmouseover="hghl(['Annotation_Annotation_materialId_fkey','public.Material.id'])" onmouseout="uhghl(['Annotation_Annotation_materialId_fkey','public.Material.id'])">materialId</text><title>&#10697;  materialId
+     text
+ &#8599; Annotation( id )</title></a>
+<a xlink:href='#public.Annotation.materialId'><use id='fk' x='708' y='188' xlink:href='#fk'/><title>&#x1F517;  References Material ( materialId -&gt; id ) </title></a>
+  <a xlink:href='#public.Annotation_taskId'><text id='public&#46;Annotation&#46;taskId' x='627' y='215' onmouseover="hghl(['Annotation_Annotation_taskId_fkey','public.Task.id'])" onmouseout="uhghl(['Annotation_Annotation_taskId_fkey','public.Task.id'])">taskId</text><title>&#10697;  taskId
+     text
+ &#8599; Annotation( id )</title></a>
+<a xlink:href='#public.Annotation.taskId'><use id='fk' x='708' y='204' xlink:href='#fk'/><title>&#x1F517;  References Task ( taskId -&gt; id ) </title></a>
+  <use id='nn' x='610' y='221' xlink:href='#nn'/><a xlink:href='#public.Annotation_userId'><text id='public&#46;Annotation&#46;userId' x='627' y='231' onmouseover="hghl(['Annotation_Annotation_userId_fkey','public.User.id'])" onmouseout="uhghl(['Annotation_Annotation_userId_fkey','public.User.id'])">userId</text><title>&#10697;  userId
+     * text
+ &#8599; Annotation( id )</title></a>
+<a xlink:href='#public.Annotation.userId'><use id='fk' x='708' y='220' xlink:href='#fk'/><title>&#x1F517;  References User ( userId -&gt; id ) </title></a>
+  <a xlink:href='#public.Annotation_questionId'><text id='public&#46;Annotation&#46;questionId' x='627' y='247' onmouseover="hghl(['Annotation_Annotation_questionId_fkey','public.Question.id'])" onmouseout="uhghl(['Annotation_Annotation_questionId_fkey','public.Question.id'])">questionId</text><title>&#10697;  questionId
+     text
+ &#8599; Annotation( id )</title></a>
+<a xlink:href='#public.Annotation.questionId'><use id='fk' x='708' y='236' xlink:href='#fk'/><title>&#x1F517;  References Question ( questionId -&gt; id ) </title></a>
+
+</g></svg>

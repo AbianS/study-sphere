@@ -1,0 +1,229 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String          @id @default(uuid())
+  name                String
+  surname             String
+  phone               String
+  email               String          @unique()
+  password            String
+  avatar              String?
+  clasesCreadas       Clase[]         @relation("classTeacher")
+  clasesInscritas     UserClase[]
+  Comment             Comment[]
+  created_at          DateTime?       @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime?       @default(now()) @updatedAt
+  deleted             DateTime?
+  Attendance          Attendance[]
+  TaskUser            TaskUser[]
+  QuestionUser        QuestionUser[]
+  mensajesEnviados    Message[]       @relation("remitente")
+  mensajesRecibidos   Message[]       @relation("destinatario")
+  Todo                Todo[]
+  notifications_token String[]
+  ResetPassowrd       ResetPassowrd[]
+  Annotation          Annotation[]
+}
+
+model Clase {
+  id          String       @id
+  title       String
+  description String
+  teacher     User         @relation("classTeacher", fields: [teacherId], references: [id])
+  teacherId   String
+  bg          String
+  students    UserClase[]
+  comments    Comment[]
+  created_at  DateTime?    @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime?    @default(now()) @updatedAt
+  deleted     DateTime?
+  Attendance  Attendance[]
+  Topic       Topic[]
+  Material    Material[]
+  Question    Question[]
+  Task        Task[]
+}
+
+model UserClase {
+  id         Int      @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  clase      Clase    @relation(fields: [claseId], references: [id])
+  claseId    String
+  assignedAt DateTime @default(now())
+
+  @@id([userId, claseId])
+}
+
+model TaskUser {
+  id        Int      @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  files     String[]
+  grade     Int?
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    String
+  completed Boolean  @default(false)
+
+  @@id([userId, taskId])
+}
+
+// add answer or/and fileUpdate
+model QuestionUser {
+  id         Int      @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  completed  Boolean  @default(false)
+
+  @@id([userId, questionId])
+}
+
+model Comment {
+  id          String       @id @default(uuid())
+  text        String
+  clase       Clase        @relation(fields: [claseId], references: [id])
+  claseId     String
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
+  files       String[]
+  annotations Annotation[]
+  created_at  DateTime?    @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime?    @default(now()) @updatedAt
+  taskId      String?
+}
+
+model Annotation {
+  id         String    @id @default(uuid())
+  text       String
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @updatedAt
+  Comment    Comment?  @relation(fields: [commentId], references: [id])
+  commentId  String?
+  Material   Material? @relation(fields: [materialId], references: [id])
+  materialId String?
+  Task       Task?     @relation(fields: [taskId], references: [id])
+  taskId     String?
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId String?
+}
+
+model Attendance {
+  id         String   @id @default(uuid())
+  attendance Boolean
+  date       DateTime
+  student    User     @relation(fields: [studentId], references: [id])
+  studentId  String
+  clase      Clase    @relation(fields: [claseId], references: [id])
+  claseId    String
+}
+
+model Topic {
+  id         String     @id @default(uuid())
+  title      String
+  clase      Clase      @relation(fields: [claseId], references: [id])
+  claseId    String
+  created_at DateTime?  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime?  @default(now()) @updatedAt
+  Material   Material[]
+  Question   Question[]
+  Task       Task[]
+}
+
+model Material {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  files       String[]
+  topic       Topic        @relation(fields: [topicId], references: [id])
+  topicId     String
+  clase       Clase        @relation(fields: [claseId], references: [id])
+  claseId     String
+  annotations Annotation[]
+  created_at  DateTime?    @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime?    @default(now()) @updatedAt
+}
+
+model Question {
+  id           String         @id @default(uuid())
+  question     String
+  score        Int?
+  dueDate      DateTime?
+  topic        Topic          @relation(fields: [topicId], references: [id])
+  topicId      String
+  clase        Clase          @relation(fields: [claseId], references: [id])
+  claseId      String
+  annotations  Annotation[]
+  created_at   DateTime?      @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime?      @default(now()) @updatedAt
+  QuestionUser QuestionUser[]
+}
+
+model Task {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  dueDate     DateTime?
+  topic       Topic        @relation(fields: [topicId], references: [id])
+  topicId     String
+  score       Int?
+  files       String[]
+  clase       Clase        @relation(fields: [claseId], references: [id])
+  claseId     String
+  annotations Annotation[]
+  created_at  DateTime?    @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime?    @default(now()) @updatedAt
+  TaskUser    TaskUser[]
+}
+
+// model Chat {
+//   id         String    @id @default(uuid())
+//   usersId    String[]
+//   messages   Message[]
+//   created_at DateTime? @default(now()) @db.Timestamptz(6)
+// }
+
+model Message {
+  id         String    @id @default(uuid())
+  senderId   String
+  sender     User      @relation("remitente", fields: [senderId], references: [id])
+  reciberId  String
+  reciber    User      @relation("destinatario", fields: [reciberId], references: [id])
+  content    String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model Todo {
+  id                String    @id @default(uuid())
+  title             String
+  execute_day       DateTime?
+  completed         Boolean   @default(false)
+  notification_time DateTime?
+  event_day         DateTime?
+  userId            String
+  user              User      @relation(fields: [userId], references: [id])
+  created_at        DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime? @default(now()) @updatedAt
+}
+
+model ResetPassowrd {
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
+  code       String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@id([userId])
+}

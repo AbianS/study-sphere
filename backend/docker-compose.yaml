@@ -1,0 +1,15 @@
+version: '3'
+
+
+services:
+  db:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: study_sphere
+    container_name: study_sphere
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
