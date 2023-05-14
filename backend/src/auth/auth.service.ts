@@ -47,7 +47,7 @@ export class AuthService {
           password: bcrypt.hashSync(password, 10),
         },
       });
-      // TODO: Mejorar
+      
       delete user.password;
       delete user.updated_at;
       delete user.created_at;
@@ -143,7 +143,7 @@ export class AuthService {
       throw new UnauthorizedException('Credentials not valid');
     }
 
-    // TODO: Mejorar
+    
     delete user.created_at;
     delete user.deleted;
     delete user.updated_at;
@@ -191,7 +191,7 @@ export class AuthService {
     });
 
     if (!findUser.notifications_token.includes(token)) {
-      // TODO: VALIDAR
+      
       await this.prisma.user.update({
         where: { id: user.id },
         data: { notifications_token: { push: token } },

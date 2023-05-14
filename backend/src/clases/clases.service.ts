@@ -55,7 +55,7 @@ export class ClasesService {
           },
         },
       });
-      // TODO: Mejorar
+      
       delete clase.created_at;
       delete clase.updated_at;
       delete clase.deleted;
@@ -109,7 +109,7 @@ export class ClasesService {
       });
     }
 
-    // TODO: cambiar email por foto de perfil
+    
     const updatedClass = await this.prisma.clase.findFirst({
       where: { id: joinClaseDataIn.classId },
       include: {
@@ -140,7 +140,6 @@ export class ClasesService {
     });
 
     // studen list to email and name
-    // TODO: Change email by profile_picture
     const studentsList = updatedClass.students.map((student) => ({
       name: student.user.name,
       email: student.user.email,
@@ -351,7 +350,6 @@ export class ClasesService {
         avatar: student.user.avatar,
       }));
 
-    // TODO: revisar
     return {
       id: clase.id,
       title: clase.title,
@@ -408,7 +406,7 @@ export class ClasesService {
   }
 
   async getTaskUser(taskId: string) {
-    // TODO: validate
+    
     const taskUser = await this.prisma.taskUser.findMany({
       where: { taskId: taskId },
       select: {
@@ -513,7 +511,6 @@ export class ClasesService {
     } catch (error) {
       console.log(error);
 
-      // TODO: comprobar
       if (error.code === 'P2003') {
         throw new NotFoundException('Topic Id not found');
       }
@@ -521,7 +518,6 @@ export class ClasesService {
   }
 
   async correctTask(correctTaskDTO: CorrectTaskDTO) {
-    // TODO: VALIDAR
     await this.prisma.taskUser.update({
       where: {
         userId_taskId: {
@@ -538,7 +534,6 @@ export class ClasesService {
   }
 
   async getAllTopics(classId: string) {
-    // TODO: VALIDAR
     const topics = await this.prisma.clase.findUnique({
       where: { id: classId },
       select: {
@@ -566,7 +561,6 @@ export class ClasesService {
 
     if (!task) throw new NotFoundException('task not found');
 
-    // TODO: create pdf
     if (solveTaskDataIn.answer) {
       const pdf = await this.createPdf(solveTaskDataIn.answer, user);
       let pdfData = Buffer.alloc(0);
@@ -686,7 +680,6 @@ export class ClasesService {
         },
       });
     } catch (error) {
-      // TODO: comprobar
       if (error.code === 'P2003') {
         throw new NotFoundException('Topic Id not found');
       }
@@ -735,7 +728,6 @@ export class ClasesService {
         });
       }
     } catch (error) {
-      // TODO: comprobar
       if (error.code === 'P2003') {
         throw new NotFoundException('Topic Id not found');
       }

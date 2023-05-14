@@ -160,7 +160,6 @@ class _DetailChatState extends State<DetailChat> {
             ),
           ),
           const Divider(height: 1),
-          // TODO: Caja de texto
           Container(
             color: Colors.white,
             child: _InputChat(),

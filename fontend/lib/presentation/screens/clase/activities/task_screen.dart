@@ -57,7 +57,6 @@ class TaskScreen extends StatelessWidget {
                 return StudentView(taskId: taskId);
               }
 
-              // TODO: Manejar error
               return const SizedBox(
                 child: Text("Error"),
               );

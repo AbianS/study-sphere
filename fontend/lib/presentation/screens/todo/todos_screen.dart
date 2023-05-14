@@ -192,7 +192,6 @@ class _TodoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Finish
         showModalBottomSheet<bool>(
           isScrollControlled: true,
           context: context,

@@ -7,8 +7,6 @@ import 'package:study_sphere_frontend/infraestructure/mappers/chat_mapper.dart';
 import '../../config/constants/enviroment.dart';
 
 class ChatDatasourceImpls extends ChatDatasource {
-  // TODO: Obtener el token aqui
-
   final dio = Dio(
     BaseOptions(
       baseUrl: Enviroment.api_url,
@@ -51,7 +49,6 @@ class ChatDatasourceImpls extends ChatDatasource {
 
   @override
   Future<Chat> getChatUser(String userId) async {
-    // TODO: VALIDAR
     final response = await dio.get('/chats/user/$userId');
 
     final Chat chat = ChatMapper.chatsJsonToEntity(response.data);

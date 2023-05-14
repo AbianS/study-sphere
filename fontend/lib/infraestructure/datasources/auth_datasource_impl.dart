@@ -69,7 +69,6 @@ class AuthDatasourceImpls extends AuthDatasource {
 
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
-      // TODO: Manejo de excepciones
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         throw Exception('Token incorrecto');
@@ -84,7 +83,6 @@ class AuthDatasourceImpls extends AuthDatasource {
   @override
   Future<void> createNotificationToken(
       String token, String notificationToken) async {
-    // TODO: VALIDAR
     final response = await dio.post(
       '/auth/notification/$notificationToken',
       options: Options(
@@ -99,7 +97,6 @@ class AuthDatasourceImpls extends AuthDatasource {
 
   @override
   Future<void> resetPassword(String email) async {
-    // TODO: VALIDAR
     final response = await dio.post('/auth/restore-password', data: {
       "email": email,
     });
@@ -109,7 +106,6 @@ class AuthDatasourceImpls extends AuthDatasource {
 
   @override
   Future<void> checkResetPassword(String email, String code) async {
-    // TODO: VALIDAR
     final response = await dio.post('/auth/check-restore-password', data: {
       "email": email,
       "code": code,
@@ -120,7 +116,6 @@ class AuthDatasourceImpls extends AuthDatasource {
 
   @override
   Future<void> confirmResetPassword(String email, String password) async {
-    // TODO: VALIDAR
     final response = await dio.post('/auth/confirm-restore-password', data: {
       "email": email,
       "password": password,
@@ -148,7 +143,7 @@ class AuthDatasourceImpls extends AuthDatasource {
         ),
       );
     }
-    // TODO: VALIDAR
+
     try {
       final response = await dio.patch(
         '/auth/update',

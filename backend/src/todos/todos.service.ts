@@ -8,7 +8,6 @@ export class TodosService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAllTodosById(user: UserDTO) {
-    // TODO: Validar
 
     const todos = await this.prisma.todo.findMany({
       where: { userId: user.id },
@@ -40,8 +39,6 @@ export class TodosService {
   }
 
   async deleteTodo(user: UserDTO, id: string) {
-    // TODO: Check if the user is owner to this todo
-
     await this.prisma.todo.delete({
       where: { id: id },
     });

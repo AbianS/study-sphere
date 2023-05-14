@@ -39,7 +39,7 @@ export class ChatsService {
   }
 
   async createMessage(payload: MessageDto) {
-    // TODO: VALIDAR
+    
     const message = await this.prisma.message.create({
       data: {
         senderId: payload.from,

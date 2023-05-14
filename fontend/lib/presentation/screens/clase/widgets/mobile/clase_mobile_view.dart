@@ -95,7 +95,7 @@ class ClaseMobileView extends StatelessWidget {
           if (ref.claseStatus == ClaseStatus.getClass) {
             return views[ref.currentIndex];
           }
-          // TODO: controlar el error
+
           return const SizedBox();
         },
       ),

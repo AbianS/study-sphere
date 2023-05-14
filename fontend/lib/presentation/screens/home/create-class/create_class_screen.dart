@@ -89,7 +89,6 @@ class _Body extends StatelessWidget {
   }
 }
 
-// TODO: reutilizar con el de join
 class _CreateButton extends StatelessWidget {
   const _CreateButton();
 

@@ -21,8 +21,6 @@ import 'package:http_parser/http_parser.dart';
 import 'package:study_sphere_frontend/presentation/utils/utils.dart';
 
 class ClaseDatasourceImpl extends ClaseDatasource {
-  // TODO: Obtener el token aqui
-
   final dio = Dio(
     BaseOptions(
       baseUrl: Enviroment.api_url,
@@ -49,7 +47,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
 
   @override
   Future<void> createClass(CreateClassDTO createClassDTO) async {
-    // TODO: errores
     final response = await dio.post(
       '/clases/create',
       options: Options(
@@ -106,7 +103,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
           ClaseMapper.detailClassJsonToEntity(response.data);
       return clase;
     } catch (e) {
-      // TODO: manejar excepciones
       throw Exception();
     }
   }
@@ -139,7 +135,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
 
   @override
   Future<void> solveTask(String taskId, String token, String answer) async {
-    // TODO: VALIDACIÓN
     try {
       await dio.post(
         '/clases/task/$taskId',
@@ -171,7 +166,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
       final Task task = ClaseMapper.taskJsonEntity(response.data);
       return task;
     } catch (e) {
-      // TODO: manejar excepciones
       throw Exception();
     }
   }
@@ -211,7 +205,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
 
   @override
   Future<List<SimpleTopic>> getAllTopics(String token, String classId) async {
-    // TODO: ERRORES
     try {
       final response = await dio.get(
         '/clases/topics/$classId',
@@ -266,7 +259,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
       }
     }
 
-    // TODO: VALIDAR
     try {
       final response = await dio.post(
         '/clases/task',
@@ -288,8 +280,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
   @override
   Future<List<CompleteTaskUser>> getAllTaskUser(
       String token, String taskId) async {
-    // TODO: VALIDAR
-
     final response = await dio.get<List>(
       '/clases/taskUser/$taskId',
       options: Options(
@@ -307,7 +297,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
 
   @override
   Future<void> correctTask(String token, CorrectTaskDTO correctTaskDTO) async {
-    // TODO: VALIDAR
     try {
       final response = await dio.post(
         '/clases/task/correct',
@@ -354,7 +343,6 @@ class ClaseDatasourceImpl extends ClaseDatasource {
       }
     }
 
-    // TODO: VALIDAR
     try {
       final response = await dio.post(
         '/clases/material',

@@ -24,7 +24,6 @@ export class MailService {
       where: { userId: user.id },
     });
 
-    // TODO: Improve code
     if (resetPassword) {
       await this.prisma.resetPassowrd.update({
         where: { userId: user.id },

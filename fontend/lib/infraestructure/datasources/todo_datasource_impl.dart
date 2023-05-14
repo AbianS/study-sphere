@@ -31,8 +31,6 @@ class TodoDatasourceImpl extends TodoDatasource {
 
   @override
   Future<void> deleteTodo(String token, String id) async {
-    // TODO: validate errors
-
     final response = await dio.delete(
       '/todos/$id',
       options: Options(
@@ -45,8 +43,6 @@ class TodoDatasourceImpl extends TodoDatasource {
 
   @override
   Future<void> createTodo(String token, CreateTodoDTO todo) async {
-    // TODO: Validate
-
     try {
       final response = await dio.post(
         '/todos',
