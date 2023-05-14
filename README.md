@@ -49,6 +49,8 @@ El proyecto consta de dos partes el backend y el frontend. Para el backend estoy
 
 - ⛩️ **Arquitectura limpia**: el proyecto está hecho siguiendo una arquitectura limpia para que sea más escalable y facíl de mantener.
 - 🔒 **Almacenaminto seguro**: Cifrado de token para almacenarlo en las preferencias de usuario de una manera segura.
+- 🔌 **Provider**: Uso de Provider como manejador de estado, recomendado por el equipo de flutter y escalable.
+- 🗞️ **Push Notification**: Notificaciones push gracias a firebase y nuestro backend.
 
 
 ### Link video
